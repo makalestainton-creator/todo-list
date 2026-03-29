@@ -1,11 +1,145 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo List</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <div class="overlay" id="overlay"></div>
+    
+    <aside class="left-sidebar" id="left-sidebar">
+      <button class="close-menu" id="close-menu">
+        <img src="icons/close-menu.svg" alt="" />
+      </button>
+      <div class="top">
+        <div class="logo">
+          <img src="icons/logo.svg" alt="" />
+          Taskey
+        </div>
+        <button>
+          Inbox
+          <img src="icons/inbox.svg" alt="" />
+        </button>
+        <button>
+          Today
+          <img src="icons/today.svg" alt="" />
+        </button>
+        <button>
+          Upcoming
+          <img src="icons/upcoming.svg" alt="" />
+        </button>
+        <button>
+          Completed
+          <img src="icons/completed.svg" alt="" />
+        </button>
+      </div>
+      <details>
+        <summary>
+          Projects
+          <img src="icons/chevron.svg" class="chevron" />
+        </summary>
+        <nav>
+          <ul>
+            <li>
+              <button>
+                Personal
+                <img src="icons/personal-projects.svg" alt="" />
+              </button>
+            </li>
+            <li>
+              <button>
+                Work
+                <img src="icons/work-projects.svg" alt="" />
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </details>
+      <button class="new-task-button"><span>+</span> New Task</button>
+    </aside>
+    <div class="container">
+      <header>
+        <div class="left-section">
+          <div class="logo">
+            <img src="icons/logo.svg" />
+            Taskey
+          </div>
+          <button id="menu-toggle" class="menu-toggle">
+            <img src="icons/sidebar.svg" />
+          </button>
+        </div>
+        <div class="search">
+          <label for="search">
+            <img src="icons/search.svg" class="search-icon" />
+          </label>
+          <input type="text" name="search" id="search" placeholder="Search" />
+        </div>
+        <button class="theme-toggle">
+          <img src="icons/light-mode.svg" />
+        </button>
+      </header>
+
+      <main>
+        <div class="tasks-container">
+          <div class="task">
+            <div class="start">
+              <input type="checkbox" name="" id="" />
+              <p class="title">Buy groceries</p>
+            </div>
+            <p class="description">Get weekly groceries from the supermarket</p>
+            <p class="due-date">2026-03-30</p>
+            <div class="end">
+              <p class="priority">Low</p>
+              <!-- <p class="notes">Don't forget the milk and eggs</p> -->
+              <p class="project">Personal</p>
+            </div>
+          </div>
+          <div class="task">
+            <div class="start">
+              <input type="checkbox" name="" id="" />
+              <p class="title">Buy groceries</p>
+            </div>
+            <p class="description">Get weekly groceries from the supermarket</p>
+            <p class="due-date">2026-03-30</p>
+            <div class="end">
+              <p class="priority">Medium</p>
+              <!-- <p class="notes">Don't forget the milk and eggs</p> -->
+              <p class="project">Personal</p>
+            </div>
+          </div>
+          <div class="task">
+            <div class="start">
+              <input type="checkbox" name="" id="" />
+              <p class="title">Buy groceries</p>
+            </div>
+            <p class="description">Get weekly groceries from the supermarket</p>
+            <p class="due-date">2026-03-30</p>
+            <div class="end">
+              <p class="priority">High</p>
+              <!-- <p class="notes">Don't forget the milk and eggs</p> -->
+              <p class="project">Personal</p>
+            </div>
+          </div>
+        </div>
+      </main>
+      <aside class="right-sidebar">
+        <div class="task-title">
+          <h3>Buy groceries</h3>
+          <img src="icons/edit.svg" />
+        </div>
+        <p class="description">Get weekly groceries from the supermarket</p>
+        <h3>Subtasks</h3>
+        <p class="subtask">None</p>
+        <div class="due-date">
+          <p>Due date</p>
+          <p>2026-03-30</p>
+        </div>
+        <div class="priority">
+          <p>Priority</p>
+          <p>Low</p>
+        </div>
+      </aside>
+    </div>
+  </body>
 </html>
