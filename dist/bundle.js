@@ -1,2 +1,1235 @@
-(()=>{var n={911(n,e,t){"use strict";t.d(e,{A:()=>i});var r=t(354),o=t.n(r),A=t(314),a=t.n(A)()(o());a.push([n.id,'* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\n:root {\n  --primary-color: #0466c8;\n  --header-background: #f3f6f9;\n  --header-border-color: #e8ebee;\n  --searchbar-background: #d5dde6;\n  --left-sidebar-background: #152333;\n  --task-backgroud: #fff;\n  --high-task-priority: #c00d0d;\n}\n\nbody {\n  padding-top: 6rem;\n  background-color: var(--header-background);\n  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;\n}\n\n.container {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n\n  max-width: 80vw;\n  margin-left: auto;\n  margin-right: auto;\n}\n\nheader {\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  height: 4rem;\n\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  background-color: var(--header-background);\n  padding: 1rem 1.2rem;\n  border-bottom: 1px solid var(--header-border-color);\n  z-index: 999;\n}\n\n.left-section {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n\n  width: 50%;\n}\n\n.menu-toggle,\n.theme-toggle,\n.close-menu {\n  background-color: transparent;\n  border: none;\n  border-radius: 4px;\n  padding: 0.2rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.menu-toggle:hover,\n.theme-toggle:hover,\n.close-menu:hover {\n  background-color: var(--searchbar-background);\n}\n\n.close-menu {\n  position: absolute;\n  right: -2.5rem;\n  z-index: 1001;\n  display: none;\n  background-color: #e3e6e9;\n}\n\n.close-menu-active {\n  display: block;\n}\n\n.left-section .logo {\n  display: none;\n}\n\n.search {\n  display: flex;\n  width: 100%;\n  position: relative;\n}\n\n.search input {\n  height: 35px;\n  width: 100%;\n  border-radius: 5px;\n  padding: 0.3rem 1.5rem;\n  border: none;\n  background-color: var(--searchbar-background);\n}\n\n.search input:focus {\n  outline: 2px solid var(--primary-color);\n}\n\n.search-icon {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n\n  z-index: 1;\n}\n\nheader .right-section {\n  display: flex;\n  align-items: center;\n  gap: 1.5rem;\n}\n\n.overlay {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  z-index: 1000;\n  display: none;\n}\n\n.overlay-active {\n  display: block;\n}\n\n.tasks-container {\n  display: flex;\n  flex-direction: column;\n  gap: 1.5rem;\n}\n\n.filter-title {\n  margin-bottom: 1rem;\n  margin-left: .5rem;\n  text-transform: capitalize;\n}\n\n.tasks-container .task {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  position: relative;\n\n  height: 5rem;\n  background: var(--task-backgroud);\n  padding: 1rem;\n  border-radius: 5px;\n  box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.05);\n  transition:\n    transform 0.3s ease,\n    box-shadow 0.3s ease;\n  cursor: pointer;\n}\n\n.task:hover {\n  transform: translateY(-2px);\n  box-shadow: 3px -3px 25px rgba(0, 0, 0, 0.1);\n}\n\n.task-active {\n  border: 1px solid #d6dee9;\n}\n\n.task .start,\n.task .end {\n  display: flex;\n}\n\n.task .start {\n  gap: 1rem;\n}\n\n.task .end {\n  gap: 1.5rem;\n}\n\n.task .description,\n.task .due-date {\n  color: #798592;\n  font-size: 0.9rem;\n}\n\n.task .description {\n  width: 50%;\n  display: -webkit-box;\n  -webkit-line-clamp: 1;\n  line-clamp: 1;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n\n  position: absolute;\n  top: 5px;\n}\n\n.task .due-date {\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n\n.task .priority {\n  padding: 0.4rem 1rem;\n  border-radius: 5px;\n}\n\n.low-priority {\n  background-color: #3fbf8e;\n  color: #282d38;\n}\n\n.medium-priority {\n  background-color: #ebd03ce5;\n  color: #313942;\n}\n\n.high-priority {\n  background-color: var(--high-task-priority);\n  color: #f2f3f5;\n}\n\n.task .project,\n.task-essentials .project-name {\n  display: flex;\n  align-items: center;\n  gap: .5rem;\n\n  background-color: #024991;\n  color: #d5dde6;\n  padding: .3rem .5rem;\n  border-radius: 15px;\n\n  img {\n    width: 15px;\n    height: 15px;\n  }\n}\n\n.left-sidebar {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  transform: translateX(clamp(-200px, 2.5vw, -15rem));\n  width: clamp(200px, 2.5vw, 15rem);\n  z-index: 1003;\n  transition: transform 0.3s ease;\n\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n\n  background-color: var(--left-sidebar-background);\n  padding: 2rem 0.7rem;\n}\n\n.logo {\n  display: flex;\n  align-items: center;\n  gap: 0.3rem;\n\n  font-weight: bold;\n  font-size: clamp(1rem, 2.5vw, 1.6rem);\n  color: var(--primary-color);\n  margin-bottom: 2rem;\n}\n\n.left-sidebar.open {\n  transform: translateX(0);\n}\n\n.left-sidebar .top {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  margin-bottom: 1rem;\n}\n\n.left-sidebar button:not(.new-task-button, .close-menu) {\n  background-color: transparent;\n  border: none;\n  border-radius: 5px;\n  padding: 0.3rem 1rem;\n  color: var(--searchbar-background);\n  font-size: 1rem;\n  cursor: pointer;\n  transition: background-color 0.2s ease;\n\n  display: flex;\n  align-items: center;\n  gap: 0.3rem;\n\n  img {\n    order: -1;\n  }\n}\n\n.left-sidebar button:hover:not(.new-task-button, .close-menu) {\n  background-color: rgba(255, 255, 255, 0.08);\n}\n\n.left-sidebar button.filter-active {\n  background-color: rgba(255, 255, 255, 0.08);\n}\n\ndetails summary {\n  cursor: pointer;\n  list-style: none;\n  outline: none;\n  margin-bottom: 1rem;\n  color: var(--searchbar-background);\n  font-size: 1rem;\n  padding: 0.3rem 1rem;\n\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\ndetails[open] summary .chevron {\n  transform: rotate(180deg);\n}\n\ndetails nav ul {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n}\n\ndetails button {\n  width: 100%;\n}\n\n.new-task-button {\n  margin-top: auto;\n  background-color: var(--primary-color);\n  border: none;\n  padding: 0.6rem;\n  border-radius: 5px;\n  color: var(--searchbar-background);\n  font-size: 0.9rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.new-task-button:hover {\n  background-color: #0354a5;\n}\n\n.new-task-button:active {\n  transform: scale(0.99);\n}\n\n.right-sidebar {\n  border-left: 1px solid #e8ebee;\n  background-color: #152333;\n  padding: 1.5rem .8rem 2rem 1.5rem;\n  border-radius: 10px 10px 0 0;\n  height: 18rem;\n\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n\n  display: flex;\n  flex-direction: column;\n\n  transform: translateY(18rem);\n  transition: transform 0.3s ease;\n}\n\n/* WebKit (Chrome/Safari) */\n.task-essentials::-webkit-scrollbar {\n  width: 8px;\n} \n\n\n.task-essentials::-webkit-scrollbar-track {\n  background: transparent; /* Makes the track blend in */\n}\n\n\n.task-essentials::-webkit-scrollbar-thumb {\n  background-color: rgba(255, 255, 255, 0.2); /* Subtle grey thumb */\n  border-radius: 20px;\n  border: 1px solid transparent; /* Creates a \'floating\' gap */\n  background-clip: content-box;\n}\n\n\n.task-essentials::-webkit-scrollbar-thumb:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.task-essentials {\n  overflow-y: auto;\n  flex: 1;\n  padding: 0 .5rem;\n}\n\n.notes {\n  background-color: #e2e9f0;\n  color: #68717c;\n  padding: .5rem 1rem;\n  line-height: 1.3;\n  border-radius: 4px;\n}\n\n.close-right-sidebar {\n  position: absolute;\n  left: 50%;\n  top: -2rem;\n  transform: translateX(-50%);\n\n  background-color: transparent;\n  border: none;\n  cursor: pointer;\n  z-index: 1002;\n  display: none;\n}\n\n.close-right-sidebar-active {\n  display: block;\n}\n\n.right-sidebar-visible {\n  transform: translateY(0);\n}\n\n.right-sidebar h3,\n.right-sidebar h4 {\n  color: #c7cdd4;\n  text-align: center;\n}\n\n.right-sidebar h4 {\n  margin: 1rem 0;\n}\n\n.right-sidebar .task-title {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n\n.completed {\n  display: none;\n  align-items: center;\n  gap: .3rem;\n  color: #3fbf8e;\n}\n\n.completed-visible {\n  display: flex;\n}\n\n.right-sidebar .description {\n  background-color: #e2e9f0;\n  line-height: 1.3;\n  color: #374f68;\n  padding: 0.3rem 1rem;\n  border-radius: 5px;\n  margin: 0.8rem 0 1.5rem 0;\n  position: relative;\n}\n\n.right-sidebar .subtasks {\n  position: relative;\n  margin: 0.8rem 0 1.8rem 0;\n}\n\n.right-sidebar .project-container {\n  position: relative;\n  margin: 0.8rem 0 1.8rem 0;\n}\n\n.right-sidebar .description::after,\n.right-sidebar .project-container::after,\n.right-sidebar .subtasks::after {\n  content: "";\n  height: 1px;\n  background-color: #67788b;\n\n  position: absolute;\n  bottom: -15px;\n  left: 0;\n  right: 0;\n}\n\n.subtask,\n.right-sidebar .due-date p:first-of-type,\n.right-sidebar .priority p:first-of-type,\n.right-sidebar .project-container p:first-of-type {\n  color: #d5dde6;\n  font-weight: bold;\n}\n\n.right-sidebar .due-date,\n.right-sidebar .priority,\n.right-sidebar .project-container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.right-sidebar .priority {\n  position: relative;\n  margin: 0.8rem 0 1.5rem 0;\n}\n\n.right-sidebar .due-date {\n  margin-bottom: 1rem;\n}\n\n.right-sidebar .due-date p:nth-of-type(2) {\n  background-color: rgba(255, 255, 255, 0.2);\n  color: #b6c0cc;\n  padding: 0.5rem 0.9rem;\n  border-radius: 5px;\n}\n\n.right-sidebar .priority p:nth-of-type(2) {\n  padding: 0.3rem 0.9rem;\n  border-radius: 5px;\n}\n\n.edit-task {\n  background-color: transparent;\n  border: none;\n  cursor: pointer;\n  position: relative;\n\n  display: flex;\n  gap: 1rem;\n}\n\n.edit-task::after {\n  position: absolute;\n  bottom: -5px;\n  left: 0;\n  right: 0;\n\n  height: 2px;\n  background-color: #67788b;\n  content: "";\n  display: none;\n}\n\n.edit-task:hover::after {\n  display: block;\n}\n\n.delete-task {\n  margin-top: 3rem;\n  width: 100%;\n  padding: .6rem;\n  border-radius: 4px;\n  border: none;\n  background-color: #b91a1a;\n  color: #f2f2f2;\n  font-size: .9rem;\n  cursor: pointer;\n  transition: background-color .2s ease;\n}\n\n.delete-task:hover {\n  background-color: #d11f1f;\n}\n\n.delete-task:active {\n  transform: scale(.99);\n}\n\n/* Hide by default for mouse users */\n.touch-only-card {\n  display: none;\n  position: fixed;\n  top: 5px;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 1005;\n\n  background-color: rgba(0, 0, 0, 0.8);\n  color: #d5dde6;\n  padding: .5rem .7rem;\n  border-radius: 5px;\n  animation: blink 10s forwards;\n}\n\n@keyframes blink {\n  0% {\n    opacity: 0;\n  }\n\n  30% {\n    opacity: .5;\n  }\n\n  50% {\n    opacity: 1;\n  }\n\n  80% {\n    opacity: .5;\n  }\n\n  100% {\n    display: none;\n  }\n}\n\n/* Show only on touch devices */\n@media (pointer: coarse) {\n  .touch-only-card {\n    display: block;\n  }\n}\n\n\n@media (min-width: 900px) {\n  .container {\n    grid-template-columns: 1fr 0.5fr;\n    gap: 1.5rem;\n    padding-left: clamp(180px, 2.5vw, 15rem);\n    max-width: unset;\n  }\n\n  .tasks-container {\n    min-width: 0;\n  }\n\n  .left-section {\n    gap: 1rem;\n  }\n\n  .left-section .logo {\n    display: flex;\n    margin-bottom: 0;\n    font-size: 1.5rem;\n  }\n\n  .right-sidebar {\n    right: 0;\n    bottom: 0;\n    top: 4rem;\n    left: auto;\n\n    border-radius: 0px;\n    padding: 0.6rem 1.5rem;\n    background: linear-gradient(180deg, #374f68 0%, #152333 100%);\n    padding: 1.5rem;\n    height: 100%;\n    width: 25vw;\n    transform: translateY(0);\n  }\n\n  .right-sidebar .description {\n    word-wrap: break-word;\n  }\n\n  .close-right-sidebar-active {\n    display: none;\n  }\n}\n',"",{version:3,sources:["webpack://./src/general.css"],names:[],mappings:"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",sourcesContent:['* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\n:root {\n  --primary-color: #0466c8;\n  --header-background: #f3f6f9;\n  --header-border-color: #e8ebee;\n  --searchbar-background: #d5dde6;\n  --left-sidebar-background: #152333;\n  --task-backgroud: #fff;\n  --high-task-priority: #c00d0d;\n}\n\nbody {\n  padding-top: 6rem;\n  background-color: var(--header-background);\n  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;\n}\n\n.container {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n\n  max-width: 80vw;\n  margin-left: auto;\n  margin-right: auto;\n}\n\nheader {\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  height: 4rem;\n\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  background-color: var(--header-background);\n  padding: 1rem 1.2rem;\n  border-bottom: 1px solid var(--header-border-color);\n  z-index: 999;\n}\n\n.left-section {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n\n  width: 50%;\n}\n\n.menu-toggle,\n.theme-toggle,\n.close-menu {\n  background-color: transparent;\n  border: none;\n  border-radius: 4px;\n  padding: 0.2rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.menu-toggle:hover,\n.theme-toggle:hover,\n.close-menu:hover {\n  background-color: var(--searchbar-background);\n}\n\n.close-menu {\n  position: absolute;\n  right: -2.5rem;\n  z-index: 1001;\n  display: none;\n  background-color: #e3e6e9;\n}\n\n.close-menu-active {\n  display: block;\n}\n\n.left-section .logo {\n  display: none;\n}\n\n.search {\n  display: flex;\n  width: 100%;\n  position: relative;\n}\n\n.search input {\n  height: 35px;\n  width: 100%;\n  border-radius: 5px;\n  padding: 0.3rem 1.5rem;\n  border: none;\n  background-color: var(--searchbar-background);\n}\n\n.search input:focus {\n  outline: 2px solid var(--primary-color);\n}\n\n.search-icon {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n\n  z-index: 1;\n}\n\nheader .right-section {\n  display: flex;\n  align-items: center;\n  gap: 1.5rem;\n}\n\n.overlay {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  z-index: 1000;\n  display: none;\n}\n\n.overlay-active {\n  display: block;\n}\n\n.tasks-container {\n  display: flex;\n  flex-direction: column;\n  gap: 1.5rem;\n}\n\n.filter-title {\n  margin-bottom: 1rem;\n  margin-left: .5rem;\n  text-transform: capitalize;\n}\n\n.tasks-container .task {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  position: relative;\n\n  height: 5rem;\n  background: var(--task-backgroud);\n  padding: 1rem;\n  border-radius: 5px;\n  box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.05);\n  transition:\n    transform 0.3s ease,\n    box-shadow 0.3s ease;\n  cursor: pointer;\n}\n\n.task:hover {\n  transform: translateY(-2px);\n  box-shadow: 3px -3px 25px rgba(0, 0, 0, 0.1);\n}\n\n.task-active {\n  border: 1px solid #d6dee9;\n}\n\n.task .start,\n.task .end {\n  display: flex;\n}\n\n.task .start {\n  gap: 1rem;\n}\n\n.task .end {\n  gap: 1.5rem;\n}\n\n.task .description,\n.task .due-date {\n  color: #798592;\n  font-size: 0.9rem;\n}\n\n.task .description {\n  width: 50%;\n  display: -webkit-box;\n  -webkit-line-clamp: 1;\n  line-clamp: 1;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n\n  position: absolute;\n  top: 5px;\n}\n\n.task .due-date {\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n\n.task .priority {\n  padding: 0.4rem 1rem;\n  border-radius: 5px;\n}\n\n.low-priority {\n  background-color: #3fbf8e;\n  color: #282d38;\n}\n\n.medium-priority {\n  background-color: #ebd03ce5;\n  color: #313942;\n}\n\n.high-priority {\n  background-color: var(--high-task-priority);\n  color: #f2f3f5;\n}\n\n.task .project,\n.task-essentials .project-name {\n  display: flex;\n  align-items: center;\n  gap: .5rem;\n\n  background-color: #024991;\n  color: #d5dde6;\n  padding: .3rem .5rem;\n  border-radius: 15px;\n\n  img {\n    width: 15px;\n    height: 15px;\n  }\n}\n\n.left-sidebar {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  transform: translateX(clamp(-200px, 2.5vw, -15rem));\n  width: clamp(200px, 2.5vw, 15rem);\n  z-index: 1003;\n  transition: transform 0.3s ease;\n\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n\n  background-color: var(--left-sidebar-background);\n  padding: 2rem 0.7rem;\n}\n\n.logo {\n  display: flex;\n  align-items: center;\n  gap: 0.3rem;\n\n  font-weight: bold;\n  font-size: clamp(1rem, 2.5vw, 1.6rem);\n  color: var(--primary-color);\n  margin-bottom: 2rem;\n}\n\n.left-sidebar.open {\n  transform: translateX(0);\n}\n\n.left-sidebar .top {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  margin-bottom: 1rem;\n}\n\n.left-sidebar button:not(.new-task-button, .close-menu) {\n  background-color: transparent;\n  border: none;\n  border-radius: 5px;\n  padding: 0.3rem 1rem;\n  color: var(--searchbar-background);\n  font-size: 1rem;\n  cursor: pointer;\n  transition: background-color 0.2s ease;\n\n  display: flex;\n  align-items: center;\n  gap: 0.3rem;\n\n  img {\n    order: -1;\n  }\n}\n\n.left-sidebar button:hover:not(.new-task-button, .close-menu) {\n  background-color: rgba(255, 255, 255, 0.08);\n}\n\n.left-sidebar button.filter-active {\n  background-color: rgba(255, 255, 255, 0.08);\n}\n\ndetails summary {\n  cursor: pointer;\n  list-style: none;\n  outline: none;\n  margin-bottom: 1rem;\n  color: var(--searchbar-background);\n  font-size: 1rem;\n  padding: 0.3rem 1rem;\n\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\ndetails[open] summary .chevron {\n  transform: rotate(180deg);\n}\n\ndetails nav ul {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n}\n\ndetails button {\n  width: 100%;\n}\n\n.new-task-button {\n  margin-top: auto;\n  background-color: var(--primary-color);\n  border: none;\n  padding: 0.6rem;\n  border-radius: 5px;\n  color: var(--searchbar-background);\n  font-size: 0.9rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.new-task-button:hover {\n  background-color: #0354a5;\n}\n\n.new-task-button:active {\n  transform: scale(0.99);\n}\n\n.right-sidebar {\n  border-left: 1px solid #e8ebee;\n  background-color: #152333;\n  padding: 1.5rem .8rem 2rem 1.5rem;\n  border-radius: 10px 10px 0 0;\n  height: 18rem;\n\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n\n  display: flex;\n  flex-direction: column;\n\n  transform: translateY(18rem);\n  transition: transform 0.3s ease;\n}\n\n/* WebKit (Chrome/Safari) */\n.task-essentials::-webkit-scrollbar {\n  width: 8px;\n} \n\n\n.task-essentials::-webkit-scrollbar-track {\n  background: transparent; /* Makes the track blend in */\n}\n\n\n.task-essentials::-webkit-scrollbar-thumb {\n  background-color: rgba(255, 255, 255, 0.2); /* Subtle grey thumb */\n  border-radius: 20px;\n  border: 1px solid transparent; /* Creates a \'floating\' gap */\n  background-clip: content-box;\n}\n\n\n.task-essentials::-webkit-scrollbar-thumb:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.task-essentials {\n  overflow-y: auto;\n  flex: 1;\n  padding: 0 .5rem;\n}\n\n.notes {\n  background-color: #e2e9f0;\n  color: #68717c;\n  padding: .5rem 1rem;\n  line-height: 1.3;\n  border-radius: 4px;\n}\n\n.close-right-sidebar {\n  position: absolute;\n  left: 50%;\n  top: -2rem;\n  transform: translateX(-50%);\n\n  background-color: transparent;\n  border: none;\n  cursor: pointer;\n  z-index: 1002;\n  display: none;\n}\n\n.close-right-sidebar-active {\n  display: block;\n}\n\n.right-sidebar-visible {\n  transform: translateY(0);\n}\n\n.right-sidebar h3,\n.right-sidebar h4 {\n  color: #c7cdd4;\n  text-align: center;\n}\n\n.right-sidebar h4 {\n  margin: 1rem 0;\n}\n\n.right-sidebar .task-title {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n\n.completed {\n  display: none;\n  align-items: center;\n  gap: .3rem;\n  color: #3fbf8e;\n}\n\n.completed-visible {\n  display: flex;\n}\n\n.right-sidebar .description {\n  background-color: #e2e9f0;\n  line-height: 1.3;\n  color: #374f68;\n  padding: 0.3rem 1rem;\n  border-radius: 5px;\n  margin: 0.8rem 0 1.5rem 0;\n  position: relative;\n}\n\n.right-sidebar .subtasks {\n  position: relative;\n  margin: 0.8rem 0 1.8rem 0;\n}\n\n.right-sidebar .project-container {\n  position: relative;\n  margin: 0.8rem 0 1.8rem 0;\n}\n\n.right-sidebar .description::after,\n.right-sidebar .project-container::after,\n.right-sidebar .subtasks::after {\n  content: "";\n  height: 1px;\n  background-color: #67788b;\n\n  position: absolute;\n  bottom: -15px;\n  left: 0;\n  right: 0;\n}\n\n.subtask,\n.right-sidebar .due-date p:first-of-type,\n.right-sidebar .priority p:first-of-type,\n.right-sidebar .project-container p:first-of-type {\n  color: #d5dde6;\n  font-weight: bold;\n}\n\n.right-sidebar .due-date,\n.right-sidebar .priority,\n.right-sidebar .project-container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.right-sidebar .priority {\n  position: relative;\n  margin: 0.8rem 0 1.5rem 0;\n}\n\n.right-sidebar .due-date {\n  margin-bottom: 1rem;\n}\n\n.right-sidebar .due-date p:nth-of-type(2) {\n  background-color: rgba(255, 255, 255, 0.2);\n  color: #b6c0cc;\n  padding: 0.5rem 0.9rem;\n  border-radius: 5px;\n}\n\n.right-sidebar .priority p:nth-of-type(2) {\n  padding: 0.3rem 0.9rem;\n  border-radius: 5px;\n}\n\n.edit-task {\n  background-color: transparent;\n  border: none;\n  cursor: pointer;\n  position: relative;\n\n  display: flex;\n  gap: 1rem;\n}\n\n.edit-task::after {\n  position: absolute;\n  bottom: -5px;\n  left: 0;\n  right: 0;\n\n  height: 2px;\n  background-color: #67788b;\n  content: "";\n  display: none;\n}\n\n.edit-task:hover::after {\n  display: block;\n}\n\n.delete-task {\n  margin-top: 3rem;\n  width: 100%;\n  padding: .6rem;\n  border-radius: 4px;\n  border: none;\n  background-color: #b91a1a;\n  color: #f2f2f2;\n  font-size: .9rem;\n  cursor: pointer;\n  transition: background-color .2s ease;\n}\n\n.delete-task:hover {\n  background-color: #d11f1f;\n}\n\n.delete-task:active {\n  transform: scale(.99);\n}\n\n/* Hide by default for mouse users */\n.touch-only-card {\n  display: none;\n  position: fixed;\n  top: 5px;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 1005;\n\n  background-color: rgba(0, 0, 0, 0.8);\n  color: #d5dde6;\n  padding: .5rem .7rem;\n  border-radius: 5px;\n  animation: blink 10s forwards;\n}\n\n@keyframes blink {\n  0% {\n    opacity: 0;\n  }\n\n  30% {\n    opacity: .5;\n  }\n\n  50% {\n    opacity: 1;\n  }\n\n  80% {\n    opacity: .5;\n  }\n\n  100% {\n    display: none;\n  }\n}\n\n/* Show only on touch devices */\n@media (pointer: coarse) {\n  .touch-only-card {\n    display: block;\n  }\n}\n\n\n@media (min-width: 900px) {\n  .container {\n    grid-template-columns: 1fr 0.5fr;\n    gap: 1.5rem;\n    padding-left: clamp(180px, 2.5vw, 15rem);\n    max-width: unset;\n  }\n\n  .tasks-container {\n    min-width: 0;\n  }\n\n  .left-section {\n    gap: 1rem;\n  }\n\n  .left-section .logo {\n    display: flex;\n    margin-bottom: 0;\n    font-size: 1.5rem;\n  }\n\n  .right-sidebar {\n    right: 0;\n    bottom: 0;\n    top: 4rem;\n    left: auto;\n\n    border-radius: 0px;\n    padding: 0.6rem 1.5rem;\n    background: linear-gradient(180deg, #374f68 0%, #152333 100%);\n    padding: 1.5rem;\n    height: 100%;\n    width: 25vw;\n    transform: translateY(0);\n  }\n\n  .right-sidebar .description {\n    word-wrap: break-word;\n  }\n\n  .close-right-sidebar-active {\n    display: none;\n  }\n}\n'],sourceRoot:""}]);const i=a},95(n,e,t){"use strict";t.d(e,{A:()=>i});var r=t(354),o=t.n(r),A=t(314),a=t.n(A)()(o());a.push([n.id,'.new-task-modal {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n\n  z-index: 1002;\n\n  background-color: #fff;\n  padding: 1.5rem;\n  border-radius: 10px;\n  display: none;\n}\n\n.new-task-modal-active {\n  display: block;\n}\n\n.new-task-modal h4 {\n  margin-bottom: 1rem;\n}\n\n.required {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n\n  margin-bottom: 1rem;\n}\n\n.required label {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n\n.required input {\n  border: 1px solid #a0aec0;\n  border-radius: 3px;\n  padding: 0.3rem 0.5rem;\n}\n\n.required input[type="text"]:focus {\n  outline: 1px solid #0b7ef1;\n}\n\n.new-task-modal fieldset {\n  margin-bottom: 1rem;\n  border: 2px solid #d5dde6;\n  border-radius: 5px;\n  padding: 0.8rem;\n\n  display: flex;\n  flex-direction: column;\n  gap: 0.7rem;\n}\n\n.new-task-modal fieldset input,\n.new-task-modal fieldset label {\n  cursor: pointer;\n}\n\n.new-task-modal legend {\n  background-color: #152333;\n  color: #e8ebee;\n  padding: 5px 15px;\n  border-radius: 4px;\n  font-weight: bold;\n}\n\n.new-task-modal textarea {\n  resize: none;\n  width: 100%;\n  height: 100px;\n  margin-bottom: 1rem;\n  border: 1px solid #a0aec0;\n  border-radius: 4px;\n  padding: 8px;\n}\n\nselect, \n::picker(select) {\n  appearance: base-select;\n}\n\nselect {\n  width: 100%;\n  padding: .3rem .5rem;\n  border: 1px solid #a0aec0;\n  border-radius: 4px;\n  background-color: #dfe5eb;\n  cursor: pointer;\n}\n\nselect:hover,\nselect:focus {\n  background-color: #d5dde6;\n}\n\nselect:focus,\nselect:open {\n  border: 1px solid #0d74db;\n}\n\n.required .form-row:nth-of-type(3) {\n  position: relative;\n  width: 100%;\n}\n\nselect::picker-icon {\n  display: none;\n}\n\n.picker-icon {\n  position: absolute;\n  right: .2rem;\n  bottom: 20px;\n  transition: transform .4s ease;\n}\n\nselect:open ~ .picker-icon {\n  transform: rotate(180deg);\n}\n\n::picker(select) {\n  border: 1px solid #a0aec0;\n  border: none;\n  border-radius: .4rem;\n  opacity: 0;\n  padding: 1rem 0;\n  background-color: #d0d8e4;\n  top: calc(anchor(bottom) + 1px);\n  transition: all .3s allow-discrete;\n}\n\n::picker(select):popover-open {\n  opacity: 1;\n}\n\n@starting-style {\n  ::picker(select):open {\n    opacity: 0;\n  }\n}\n\n\noption {\n  display: flex;\n  cursor: pointer;\n  padding: .4rem 1rem;\n}\n\noption:hover {\n  background-color: #d7e0ec;\n  color: #0b7ef1;\n}\n\noption:checked {\n  font-weight: bold;\n  color: #0b7ef1;\n}\n\noption:not(option:last-of-type) {\n  margin-bottom: .4rem;\n}\n\noption::checkmark {\n  content: "✅";\n  font-size: .9rem;\n  order: 1;\n  margin-left: auto;\n}\n\ninput[type="date"] {\n  width: 100%;\n}\n\n.new-task-modal textarea:focus {\n  outline: 1px solid #0b7ef1;\n}\n\n.new-task-modal select {\n  margin-bottom: 1rem;\n}\n\n.buttons {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n}\n\n.buttons button {\n  padding: 0.4rem 1rem;\n  cursor: pointer;\n  font-size: 0.9rem;\n  border-radius: 4px;\n}\n\n.buttons button:active {\n  transform: scale(0.98);\n}\n\n.buttons button[type="submit"] {\n  background-color: #0d74db;\n  color: #fff;\n  border: none;\n  transition: background-color 0.3s ease;\n}\n\n.buttons button[type="button"] {\n  background-color: transparent;\n  border: 2px solid #0d74db;\n  transition:\n    background-color 0.3s ease,\n    color 0.3s ease;\n}\n\n.buttons button[type="submit"]:hover {\n  background-color: #0862bb;\n}\n\n.buttons button[type="button"]:hover {\n  background-color: #0d74db;\n  color: #fff;\n}\n',"",{version:3,sources:["webpack://./src/new-task-modal.css"],names:[],mappings:"AAAA;EACE,eAAe;EACf,QAAQ;EACR,SAAS;EACT,gCAAgC;;EAEhC,aAAa;;EAEb,sBAAsB;EACtB,eAAe;EACf,mBAAmB;EACnB,aAAa;AACf;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,8BAA8B;EAC9B,SAAS;;EAET,mBAAmB;AACrB;;AAEA;EACE,cAAc;EACd,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,kBAAkB;EAClB,sBAAsB;AACxB;;AAEA;EACE,0BAA0B;AAC5B;;AAEA;EACE,mBAAmB;EACnB,yBAAyB;EACzB,kBAAkB;EAClB,eAAe;;EAEf,aAAa;EACb,sBAAsB;EACtB,WAAW;AACb;;AAEA;;EAEE,eAAe;AACjB;;AAEA;EACE,yBAAyB;EACzB,cAAc;EACd,iBAAiB;EACjB,kBAAkB;EAClB,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,WAAW;EACX,aAAa;EACb,mBAAmB;EACnB,yBAAyB;EACzB,kBAAkB;EAClB,YAAY;AACd;;AAEA;;EAEE,uBAAuB;AACzB;;AAEA;EACE,WAAW;EACX,oBAAoB;EACpB,yBAAyB;EACzB,kBAAkB;EAClB,yBAAyB;EACzB,eAAe;AACjB;;AAEA;;EAEE,yBAAyB;AAC3B;;AAEA;;EAEE,yBAAyB;AAC3B;;AAEA;EACE,kBAAkB;EAClB,WAAW;AACb;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,kBAAkB;EAClB,YAAY;EACZ,YAAY;EACZ,8BAA8B;AAChC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,oBAAoB;EACpB,UAAU;EACV,eAAe;EACf,yBAAyB;EACzB,+BAA+B;EAC/B,kCAAkC;AACpC;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE;IACE,UAAU;EACZ;AACF;;;AAGA;EACE,aAAa;EACb,eAAe;EACf,mBAAmB;AACrB;;AAEA;EACE,yBAAyB;EACzB,cAAc;AAChB;;AAEA;EACE,iBAAiB;EACjB,cAAc;AAChB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,YAAY;EACZ,gBAAgB;EAChB,QAAQ;EACR,iBAAiB;AACnB;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,0BAA0B;AAC5B;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,8BAA8B;EAC9B,SAAS;AACX;;AAEA;EACE,oBAAoB;EACpB,eAAe;EACf,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,sBAAsB;AACxB;;AAEA;EACE,yBAAyB;EACzB,WAAW;EACX,YAAY;EACZ,sCAAsC;AACxC;;AAEA;EACE,6BAA6B;EAC7B,yBAAyB;EACzB;;mBAEiB;AACnB;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;EACzB,WAAW;AACb",sourcesContent:['.new-task-modal {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n\n  z-index: 1002;\n\n  background-color: #fff;\n  padding: 1.5rem;\n  border-radius: 10px;\n  display: none;\n}\n\n.new-task-modal-active {\n  display: block;\n}\n\n.new-task-modal h4 {\n  margin-bottom: 1rem;\n}\n\n.required {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n\n  margin-bottom: 1rem;\n}\n\n.required label {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n\n.required input {\n  border: 1px solid #a0aec0;\n  border-radius: 3px;\n  padding: 0.3rem 0.5rem;\n}\n\n.required input[type="text"]:focus {\n  outline: 1px solid #0b7ef1;\n}\n\n.new-task-modal fieldset {\n  margin-bottom: 1rem;\n  border: 2px solid #d5dde6;\n  border-radius: 5px;\n  padding: 0.8rem;\n\n  display: flex;\n  flex-direction: column;\n  gap: 0.7rem;\n}\n\n.new-task-modal fieldset input,\n.new-task-modal fieldset label {\n  cursor: pointer;\n}\n\n.new-task-modal legend {\n  background-color: #152333;\n  color: #e8ebee;\n  padding: 5px 15px;\n  border-radius: 4px;\n  font-weight: bold;\n}\n\n.new-task-modal textarea {\n  resize: none;\n  width: 100%;\n  height: 100px;\n  margin-bottom: 1rem;\n  border: 1px solid #a0aec0;\n  border-radius: 4px;\n  padding: 8px;\n}\n\nselect, \n::picker(select) {\n  appearance: base-select;\n}\n\nselect {\n  width: 100%;\n  padding: .3rem .5rem;\n  border: 1px solid #a0aec0;\n  border-radius: 4px;\n  background-color: #dfe5eb;\n  cursor: pointer;\n}\n\nselect:hover,\nselect:focus {\n  background-color: #d5dde6;\n}\n\nselect:focus,\nselect:open {\n  border: 1px solid #0d74db;\n}\n\n.required .form-row:nth-of-type(3) {\n  position: relative;\n  width: 100%;\n}\n\nselect::picker-icon {\n  display: none;\n}\n\n.picker-icon {\n  position: absolute;\n  right: .2rem;\n  bottom: 20px;\n  transition: transform .4s ease;\n}\n\nselect:open ~ .picker-icon {\n  transform: rotate(180deg);\n}\n\n::picker(select) {\n  border: 1px solid #a0aec0;\n  border: none;\n  border-radius: .4rem;\n  opacity: 0;\n  padding: 1rem 0;\n  background-color: #d0d8e4;\n  top: calc(anchor(bottom) + 1px);\n  transition: all .3s allow-discrete;\n}\n\n::picker(select):popover-open {\n  opacity: 1;\n}\n\n@starting-style {\n  ::picker(select):open {\n    opacity: 0;\n  }\n}\n\n\noption {\n  display: flex;\n  cursor: pointer;\n  padding: .4rem 1rem;\n}\n\noption:hover {\n  background-color: #d7e0ec;\n  color: #0b7ef1;\n}\n\noption:checked {\n  font-weight: bold;\n  color: #0b7ef1;\n}\n\noption:not(option:last-of-type) {\n  margin-bottom: .4rem;\n}\n\noption::checkmark {\n  content: "✅";\n  font-size: .9rem;\n  order: 1;\n  margin-left: auto;\n}\n\ninput[type="date"] {\n  width: 100%;\n}\n\n.new-task-modal textarea:focus {\n  outline: 1px solid #0b7ef1;\n}\n\n.new-task-modal select {\n  margin-bottom: 1rem;\n}\n\n.buttons {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n}\n\n.buttons button {\n  padding: 0.4rem 1rem;\n  cursor: pointer;\n  font-size: 0.9rem;\n  border-radius: 4px;\n}\n\n.buttons button:active {\n  transform: scale(0.98);\n}\n\n.buttons button[type="submit"] {\n  background-color: #0d74db;\n  color: #fff;\n  border: none;\n  transition: background-color 0.3s ease;\n}\n\n.buttons button[type="button"] {\n  background-color: transparent;\n  border: 2px solid #0d74db;\n  transition:\n    background-color 0.3s ease,\n    color 0.3s ease;\n}\n\n.buttons button[type="submit"]:hover {\n  background-color: #0862bb;\n}\n\n.buttons button[type="button"]:hover {\n  background-color: #0d74db;\n  color: #fff;\n}\n'],sourceRoot:""}]);const i=a},314(n){"use strict";n.exports=function(n){var e=[];return e.toString=function(){return this.map(function(e){var t="",r=void 0!==e[5];return e[4]&&(t+="@supports (".concat(e[4],") {")),e[2]&&(t+="@media ".concat(e[2]," {")),r&&(t+="@layer".concat(e[5].length>0?" ".concat(e[5]):""," {")),t+=n(e),r&&(t+="}"),e[2]&&(t+="}"),e[4]&&(t+="}"),t}).join("")},e.i=function(n,t,r,o,A){"string"==typeof n&&(n=[[null,n,void 0]]);var a={};if(r)for(var i=0;i<this.length;i++){var s=this[i][0];null!=s&&(a[s]=!0)}for(var c=0;c<n.length;c++){var d=[].concat(n[c]);r&&a[d[0]]||(void 0!==A&&(void 0===d[5]||(d[1]="@layer".concat(d[5].length>0?" ".concat(d[5]):""," {").concat(d[1],"}")),d[5]=A),t&&(d[2]?(d[1]="@media ".concat(d[2]," {").concat(d[1],"}"),d[2]=t):d[2]=t),o&&(d[4]?(d[1]="@supports (".concat(d[4],") {").concat(d[1],"}"),d[4]=o):d[4]="".concat(o)),e.push(d))}},e}},354(n){"use strict";n.exports=function(n){var e=n[1],t=n[3];if(!t)return e;if("function"==typeof btoa){var r=btoa(unescape(encodeURIComponent(JSON.stringify(t)))),o="sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(r),A="/*# ".concat(o," */");return[e].concat([A]).join("\n")}return[e].join("\n")}},353(n){n.exports=function(){"use strict";var n=6e4,e=36e5,t="millisecond",r="second",o="minute",A="hour",a="day",i="week",s="month",c="quarter",d="year",l="date",p="Invalid Date",u=/^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/,m=/\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,E={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_"),ordinal:function(n){var e=["th","st","nd","rd"],t=n%100;return"["+n+(e[(t-20)%10]||e[t]||e[0])+"]"}},b=function(n,e,t){var r=String(n);return!r||r.length>=e?n:""+Array(e+1-r.length).join(t)+n},C={s:b,z:function(n){var e=-n.utcOffset(),t=Math.abs(e),r=Math.floor(t/60),o=t%60;return(e<=0?"+":"-")+b(r,2,"0")+":"+b(o,2,"0")},m:function n(e,t){if(e.date()<t.date())return-n(t,e);var r=12*(t.year()-e.year())+(t.month()-e.month()),o=e.clone().add(r,s),A=t-o<0,a=e.clone().add(r+(A?-1:1),s);return+(-(r+(t-o)/(A?o-a:a-o))||0)},a:function(n){return n<0?Math.ceil(n)||0:Math.floor(n)},p:function(n){return{M:s,y:d,w:i,d:a,D:l,h:A,m:o,s:r,ms:t,Q:c}[n]||String(n||"").toLowerCase().replace(/s$/,"")},u:function(n){return void 0===n}},g="en",f={};f[g]=E;var B="$isDayjsObject",h=function(n){return n instanceof x||!(!n||!n[B])},k=function n(e,t,r){var o;if(!e)return g;if("string"==typeof e){var A=e.toLowerCase();f[A]&&(o=A),t&&(f[A]=t,o=A);var a=e.split("-");if(!o&&a.length>1)return n(a[0])}else{var i=e.name;f[i]=e,o=i}return!r&&o&&(g=o),o||!r&&g},y=function(n,e){if(h(n))return n.clone();var t="object"==typeof e?e:{};return t.date=n,t.args=arguments,new x(t)},v=C;v.l=k,v.i=h,v.w=function(n,e){return y(n,{locale:e.$L,utc:e.$u,x:e.$x,$offset:e.$offset})};var x=function(){function E(n){this.$L=k(n.locale,null,!0),this.parse(n),this.$x=this.$x||n.x||{},this[B]=!0}var b=E.prototype;return b.parse=function(n){this.$d=function(n){var e=n.date,t=n.utc;if(null===e)return new Date(NaN);if(v.u(e))return new Date;if(e instanceof Date)return new Date(e);if("string"==typeof e&&!/Z$/i.test(e)){var r=e.match(u);if(r){var o=r[2]-1||0,A=(r[7]||"0").substring(0,3);return t?new Date(Date.UTC(r[1],o,r[3]||1,r[4]||0,r[5]||0,r[6]||0,A)):new Date(r[1],o,r[3]||1,r[4]||0,r[5]||0,r[6]||0,A)}}return new Date(e)}(n),this.init()},b.init=function(){var n=this.$d;this.$y=n.getFullYear(),this.$M=n.getMonth(),this.$D=n.getDate(),this.$W=n.getDay(),this.$H=n.getHours(),this.$m=n.getMinutes(),this.$s=n.getSeconds(),this.$ms=n.getMilliseconds()},b.$utils=function(){return v},b.isValid=function(){return!(this.$d.toString()===p)},b.isSame=function(n,e){var t=y(n);return this.startOf(e)<=t&&t<=this.endOf(e)},b.isAfter=function(n,e){return y(n)<this.startOf(e)},b.isBefore=function(n,e){return this.endOf(e)<y(n)},b.$g=function(n,e,t){return v.u(n)?this[e]:this.set(t,n)},b.unix=function(){return Math.floor(this.valueOf()/1e3)},b.valueOf=function(){return this.$d.getTime()},b.startOf=function(n,e){var t=this,c=!!v.u(e)||e,p=v.p(n),u=function(n,e){var r=v.w(t.$u?Date.UTC(t.$y,e,n):new Date(t.$y,e,n),t);return c?r:r.endOf(a)},m=function(n,e){return v.w(t.toDate()[n].apply(t.toDate("s"),(c?[0,0,0,0]:[23,59,59,999]).slice(e)),t)},E=this.$W,b=this.$M,C=this.$D,g="set"+(this.$u?"UTC":"");switch(p){case d:return c?u(1,0):u(31,11);case s:return c?u(1,b):u(0,b+1);case i:var f=this.$locale().weekStart||0,B=(E<f?E+7:E)-f;return u(c?C-B:C+(6-B),b);case a:case l:return m(g+"Hours",0);case A:return m(g+"Minutes",1);case o:return m(g+"Seconds",2);case r:return m(g+"Milliseconds",3);default:return this.clone()}},b.endOf=function(n){return this.startOf(n,!1)},b.$set=function(n,e){var i,c=v.p(n),p="set"+(this.$u?"UTC":""),u=(i={},i[a]=p+"Date",i[l]=p+"Date",i[s]=p+"Month",i[d]=p+"FullYear",i[A]=p+"Hours",i[o]=p+"Minutes",i[r]=p+"Seconds",i[t]=p+"Milliseconds",i)[c],m=c===a?this.$D+(e-this.$W):e;if(c===s||c===d){var E=this.clone().set(l,1);E.$d[u](m),E.init(),this.$d=E.set(l,Math.min(this.$D,E.daysInMonth())).$d}else u&&this.$d[u](m);return this.init(),this},b.set=function(n,e){return this.clone().$set(n,e)},b.get=function(n){return this[v.p(n)]()},b.add=function(t,c){var l,p=this;t=Number(t);var u=v.p(c),m=function(n){var e=y(p);return v.w(e.date(e.date()+Math.round(n*t)),p)};if(u===s)return this.set(s,this.$M+t);if(u===d)return this.set(d,this.$y+t);if(u===a)return m(1);if(u===i)return m(7);var E=(l={},l[o]=n,l[A]=e,l[r]=1e3,l)[u]||1,b=this.$d.getTime()+t*E;return v.w(b,this)},b.subtract=function(n,e){return this.add(-1*n,e)},b.format=function(n){var e=this,t=this.$locale();if(!this.isValid())return t.invalidDate||p;var r=n||"YYYY-MM-DDTHH:mm:ssZ",o=v.z(this),A=this.$H,a=this.$m,i=this.$M,s=t.weekdays,c=t.months,d=t.meridiem,l=function(n,t,o,A){return n&&(n[t]||n(e,r))||o[t].slice(0,A)},u=function(n){return v.s(A%12||12,n,"0")},E=d||function(n,e,t){var r=n<12?"AM":"PM";return t?r.toLowerCase():r};return r.replace(m,function(n,r){return r||function(n){switch(n){case"YY":return String(e.$y).slice(-2);case"YYYY":return v.s(e.$y,4,"0");case"M":return i+1;case"MM":return v.s(i+1,2,"0");case"MMM":return l(t.monthsShort,i,c,3);case"MMMM":return l(c,i);case"D":return e.$D;case"DD":return v.s(e.$D,2,"0");case"d":return String(e.$W);case"dd":return l(t.weekdaysMin,e.$W,s,2);case"ddd":return l(t.weekdaysShort,e.$W,s,3);case"dddd":return s[e.$W];case"H":return String(A);case"HH":return v.s(A,2,"0");case"h":return u(1);case"hh":return u(2);case"a":return E(A,a,!0);case"A":return E(A,a,!1);case"m":return String(a);case"mm":return v.s(a,2,"0");case"s":return String(e.$s);case"ss":return v.s(e.$s,2,"0");case"SSS":return v.s(e.$ms,3,"0");case"Z":return o}return null}(n)||o.replace(":","")})},b.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},b.diff=function(t,l,p){var u,m=this,E=v.p(l),b=y(t),C=(b.utcOffset()-this.utcOffset())*n,g=this-b,f=function(){return v.m(m,b)};switch(E){case d:u=f()/12;break;case s:u=f();break;case c:u=f()/3;break;case i:u=(g-C)/6048e5;break;case a:u=(g-C)/864e5;break;case A:u=g/e;break;case o:u=g/n;break;case r:u=g/1e3;break;default:u=g}return p?u:v.a(u)},b.daysInMonth=function(){return this.endOf(s).$D},b.$locale=function(){return f[this.$L]},b.locale=function(n,e){if(!n)return this.$L;var t=this.clone(),r=k(n,e,!0);return r&&(t.$L=r),t},b.clone=function(){return v.w(this.$d,this)},b.toDate=function(){return new Date(this.valueOf())},b.toJSON=function(){return this.isValid()?this.toISOString():null},b.toISOString=function(){return this.$d.toISOString()},b.toString=function(){return this.$d.toUTCString()},E}(),w=x.prototype;return y.prototype=w,[["$ms",t],["$s",r],["$m",o],["$H",A],["$W",a],["$M",s],["$y",d],["$D",l]].forEach(function(n){w[n[1]]=function(e){return this.$g(e,n[0],n[1])}}),y.extend=function(n,e){return n.$i||(n(e,x,y),n.$i=!0),y},y.locale=k,y.isDayjs=h,y.unix=function(n){return y(1e3*n)},y.en=f[g],y.Ls=f,y.p={},y}()},72(n){"use strict";var e=[];function t(n){for(var t=-1,r=0;r<e.length;r++)if(e[r].identifier===n){t=r;break}return t}function r(n,r){for(var A={},a=[],i=0;i<n.length;i++){var s=n[i],c=r.base?s[0]+r.base:s[0],d=A[c]||0,l="".concat(c," ").concat(d);A[c]=d+1;var p=t(l),u={css:s[1],media:s[2],sourceMap:s[3],supports:s[4],layer:s[5]};if(-1!==p)e[p].references++,e[p].updater(u);else{var m=o(u,r);r.byIndex=i,e.splice(i,0,{identifier:l,updater:m,references:1})}a.push(l)}return a}function o(n,e){var t=e.domAPI(e);return t.update(n),function(e){if(e){if(e.css===n.css&&e.media===n.media&&e.sourceMap===n.sourceMap&&e.supports===n.supports&&e.layer===n.layer)return;t.update(n=e)}else t.remove()}}n.exports=function(n,o){var A=r(n=n||[],o=o||{});return function(n){n=n||[];for(var a=0;a<A.length;a++){var i=t(A[a]);e[i].references--}for(var s=r(n,o),c=0;c<A.length;c++){var d=t(A[c]);0===e[d].references&&(e[d].updater(),e.splice(d,1))}A=s}}},659(n){"use strict";var e={};n.exports=function(n,t){var r=function(n){if(void 0===e[n]){var t=document.querySelector(n);if(window.HTMLIFrameElement&&t instanceof window.HTMLIFrameElement)try{t=t.contentDocument.head}catch(n){t=null}e[n]=t}return e[n]}(n);if(!r)throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");r.appendChild(t)}},540(n){"use strict";n.exports=function(n){var e=document.createElement("style");return n.setAttributes(e,n.attributes),n.insert(e,n.options),e}},56(n,e,t){"use strict";n.exports=function(n){var e=t.nc;e&&n.setAttribute("nonce",e)}},825(n){"use strict";n.exports=function(n){if("undefined"==typeof document)return{update:function(){},remove:function(){}};var e=n.insertStyleElement(n);return{update:function(t){!function(n,e,t){var r="";t.supports&&(r+="@supports (".concat(t.supports,") {")),t.media&&(r+="@media ".concat(t.media," {"));var o=void 0!==t.layer;o&&(r+="@layer".concat(t.layer.length>0?" ".concat(t.layer):""," {")),r+=t.css,o&&(r+="}"),t.media&&(r+="}"),t.supports&&(r+="}");var A=t.sourceMap;A&&"undefined"!=typeof btoa&&(r+="\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(A))))," */")),e.styleTagTransform(r,n,e.options)}(e,n,t)},remove:function(){!function(n){if(null===n.parentNode)return!1;n.parentNode.removeChild(n)}(e)}}}},113(n){"use strict";n.exports=function(n,e){if(e.styleSheet)e.styleSheet.cssText=n;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(n))}}}},e={};function t(r){var o=e[r];if(void 0!==o)return o.exports;var A=e[r]={id:r,exports:{}};return n[r].call(A.exports,A,A.exports,t),A.exports}t.n=n=>{var e=n&&n.__esModule?()=>n.default:()=>n;return t.d(e,{a:e}),e},t.d=(n,e)=>{for(var r in e)t.o(e,r)&&!t.o(n,r)&&Object.defineProperty(n,r,{enumerable:!0,get:e[r]})},t.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(n){if("object"==typeof window)return window}}(),t.o=(n,e)=>Object.prototype.hasOwnProperty.call(n,e),(()=>{var n;t.g.importScripts&&(n=t.g.location+"");var e=t.g.document;if(!n&&e&&(e.currentScript&&"SCRIPT"===e.currentScript.tagName.toUpperCase()&&(n=e.currentScript.src),!n)){var r=e.getElementsByTagName("script");if(r.length)for(var o=r.length-1;o>-1&&(!n||!/^http(s?):/.test(n));)n=r[o--].src}if(!n)throw new Error("Automatic publicPath is not supported in this browser");n=n.replace(/^blob:/,"").replace(/#.*$/,"").replace(/\?.*$/,"").replace(/\/[^\/]+$/,"/"),t.p=n})(),t.nc=void 0,(()=>{"use strict";var n=t(72),e=t.n(n),r=t(825),o=t.n(r),A=t(659),a=t.n(A),i=t(56),s=t.n(i),c=t(540),d=t.n(c),l=t(113),p=t.n(l),u=t(911),m={};m.styleTagTransform=p(),m.setAttributes=s(),m.insert=a().bind(null,"head"),m.domAPI=o(),m.insertStyleElement=d(),e()(u.A,m),u.A&&u.A.locals&&u.A.locals;var E=t(95),b={};b.styleTagTransform=p(),b.setAttributes=s(),b.insert=a().bind(null,"head"),b.domAPI=o(),b.insertStyleElement=d(),e()(E.A,b),E.A&&E.A.locals&&E.A.locals;const C=t.p+"7b49b4145dae406200b3.svg",g=t.p+"969944ad3e95cf794413.svg",f=t.p+"b648134b1e7b6d05e694.svg",B=t.p+"9506e30e9e7c1259ad47.svg",h=t.p+"8873c541d750cb8dc155.svg",k=t.p+"83da2bafcacd239ef5f5.svg",y=document.getElementById("menu-toggle"),v=document.getElementById("left-sidebar"),x=document.getElementById("overlay"),w=document.getElementById("close-menu");function S(){v.classList.remove("open"),w.classList.remove("close-menu-active")}var $=t(353);const j=document.getElementById("tasks-container"),M=document.querySelectorAll(".js-new-task-button"),Y=document.getElementById("new-task-modal"),D=Y.querySelector(".js-close"),L=document.querySelector(".close-right-sidebar"),W=document.querySelector(".js-right-sidebar"),I=W.querySelector(".task-essentials");class z{constructor(n){this.title=n.title,this.description=n.description,this.dueDate=n.dueDate,this.priority=n.priority,this.notes=n.notes,this.project=n.project,this.completed=!1}}const q=JSON.parse(localStorage.getItem("todos"))||[{title:"Buy groceries",description:"Get weekly groceries from the supermarket",dueDate:"2026-03-30",priority:"low",notes:"Don't forget the milk and eggs",project:"Personal",completed:!1},{title:"Finish project report",description:"Complete the quarterly report for the team",dueDate:"2026-04-01",priority:"high",notes:"Include charts from last month's data",project:"Work",completed:!1},{title:"Doctor appointment",description:"Annual checkup at the clinic",dueDate:"2026-04-05",priority:"medium",notes:"Bring insurance card",project:"Health",completed:!1},{title:"Fix login bug",description:"Users are unable to reset their password",dueDate:"2026-03-29",priority:"high",notes:"Reported by 3 users, check auth middleware",project:"Work",completed:!1},{title:"Read JavaScript book",description:"Continue reading You Don't Know JS",dueDate:"2026-04-10",priority:"low",notes:"Currently on chapter 4",project:"Learning",completed:!1}];function T(){localStorage.setItem("todos",JSON.stringify(q))}q.map(n=>new z(n)),y.addEventListener("click",()=>{v.classList.toggle("open"),w.classList.toggle("close-menu-active")}),w.addEventListener("click",()=>{S()}),document.addEventListener("click",n=>{v.contains(n.target)||y.contains(n.target)||S()}),U(),Q(),_(),R(j.querySelector(".js-task")),F(),P(),V();let O="all";function U(n=q){j.innerHTML=n.map((n,e)=>{const t=$(n.dueDate).format("DD MMMM YYYY");return` <div class="task js-task" data-index="${q.indexOf(n)}">\n      <div class="start">\n        <input type="checkbox" class="js-completed" ${n.completed?"checked":""}  />\n        <p class="title">${n.title}</p>\n      </div>\n      <p class="description">${n.description}</p>\n      <p class="due-date">${t}</p>\n      <div class="end">\n        <p class="priority js-priority">${n.priority}</p>\n        <p class="project">\n          <span class="project-svg"></span>\n          ${n.project}\n        </p>\n      </div>\n    </div>\n  `}).join("")}function H(n){const e=$().format("YYYY-MM-DD");return"today"===n?q.filter(n=>n.dueDate===e):"upcoming"===n?q.filter(n=>$(n.dueDate).isAfter(e)):"Personal"===n?q.filter(n=>"Personal"===n.project):"Work"===n?q.filter(n=>"Work"===n.project):"Learning"===n?q.filter(n=>"Learning"===n.project):"Health"===n?q.filter(n=>"Health"===n.project):"Completed"===n?q.filter(n=>!0===n.completed):q}function X(n){O=n,U(H(n)),Q(),_(),V();const e=j.querySelector(".js-task");e?(R(e),F(),P()):I.innerHTML="<p>No tasks for this filter.</p>"}function N(n){document.querySelectorAll(".left-sidebar button").forEach(n=>n.classList.remove("filter-active")),n.classList.add("filter-active")}j.addEventListener("change",n=>{if(n.target.classList.contains("js-completed")){const e=Number(n.target.closest(".js-task").getAttribute("data-index"));q[e].completed=n.target.checked,T(),R(n.target.closest(".js-task")),F(),P()}}),document.querySelectorAll("[data-filter]").forEach(n=>{n.addEventListener("click",()=>{N(n),X(n.getAttribute("data-filter")),document.querySelector(".filter-title").textContent=`${n.getAttribute("data-filter")}`})}),document.querySelectorAll(".project-filter").forEach(n=>{n.addEventListener("click",()=>{N(n),X(n.textContent.trim()),document.querySelector(".filter-title").textContent=`${n.textContent.trim()}`})});const Z=document.getElementById("search");function Q(){j.querySelectorAll(".js-task").forEach(n=>{const e=n.querySelector(".js-priority");"low"===e.textContent?e.classList.add("low-priority"):"medium"===e.textContent?e.classList.add("medium-priority"):"high"===e.textContent&&e.classList.add("high-priority")})}function P(){const n=I.querySelector(".js-prior");"low"===n.textContent?n.classList.add("low-priority"):"medium"===n.textContent?n.classList.add("medium-priority"):"high"===n.textContent&&n.classList.add("high-priority")}function _(){j.querySelectorAll(".js-task").forEach(n=>{const e=n.querySelector(".project"),t=n.querySelector(".project-svg");"Personal"===e.textContent.trim()?t.innerHTML=`<img src="${g}" />`:"Work"===e.textContent.trim()?t.innerHTML=`<img src="${f}" />`:"Health"===e.textContent.trim()?t.innerHTML=`<img src="${B}" />`:"Learning"===e.textContent.trim()&&(t.innerHTML=`<img src="${h}" />`)})}function R(n){const e=Number(n.getAttribute("data-index"));q.forEach((n,t)=>{if(t===e){const t=$(n.dueDate).format("DD MMMM YYYY");I.innerHTML=`\n        <div class="task-title">\n          \n          <button class="edit-task" data-task-index="${e}">\n          <h3>${n.title}</h3>\n            <img src="${C}" />\n          </button> \n          ${n.completed?`\n          <p class="completed completed-visible">\n            <img src="${k}"/>\n            Completed\n          </p>`:`\n          <p class="completed">\n            <img src="${k}"/>\n            Completed\n          </p>`}         \n        </div>\n        <p class="description">${n.description}</p>\n        <div class="subtasks">\n          <h3>Subtasks</h3>\n          <p class="subtask">None</p>\n        </div>\n        <div class="due-date">\n          <p>Due date</p>\n          <p>${t}</p>\n        </div>\n        <div class="priority js-priority">\n          <p>Priority</p>\n          <p class="js-prior">${n.priority}</p>\n        </div>\n        <div class="project-container">\n          <p class="project">Project</p>\n          <p class="project-name">\n            <span class="project-svg"></span>\n            ${n.project}\n          </p>\n        </div>\n        <h4>notes</h4>\n        <div class="notes">\n          ${n.notes?`${n.notes}`:"No notes for this task"}\n        </div>\n        <button class="delete-task" data-task-index="${e}">Delete Task</button>\n      `}}),function(){const n=I.querySelector(".edit-task");n&&n.addEventListener("click",()=>{!function(n){G="edit",J=n;const e=q[n];document.getElementById("title").value=e.title,document.getElementById("description").value=e.description,document.getElementById("project").value=e.project,document.getElementById("notes").value=e.notes,document.getElementById("date").value=e.dueDate,document.querySelector(`input[name="priority"][value="${e.priority}"]`).checked=!0,x.classList.add("overlay-active"),Y.classList.add("new-task-modal-active")}(Number(n.getAttribute("data-task-index")))})}(),tn()}function F(){const n=I.querySelector(".project-name").textContent.trim(),e=I.querySelector(".project-svg");"Personal"===n?e.innerHTML=`<img src="${g}" />`:"Work"===n?e.innerHTML=`<img src="${f}" />`:"Health"===n?e.innerHTML=`<img src="${B}" />`:"Learning"===n&&(e.innerHTML=`<img src="${h}" />`)}function V(){j.querySelectorAll(".js-task").forEach(n=>{n.addEventListener("click",e=>{var t;t=n,j.querySelectorAll(".js-task").forEach(n=>{n.classList.remove("task-active")}),t.classList.add("task-active"),R(n),W.classList.add("right-sidebar-visible");const r=I.querySelector(".js-prior");"low"===r.textContent?r.classList.add("low-priority"):"medium"===r.textContent?r.classList.add("medium-priority"):"high"===r.textContent&&r.classList.add("high-priority"),F(),L.classList.add("close-right-sidebar-active")})}),L.addEventListener("click",()=>{W.classList.remove("right-sidebar-visible"),L.classList.remove("close-right-sidebar-active")})}Z.addEventListener("input",()=>{const n=Z.value.trim().toLowerCase();if(!n)return void X(O);U(H(O).filter(e=>e.title.toLowerCase().includes(n))),Q(),_(),V();const e=j.querySelector(".js-task");e?(R(e),F(),P()):I.innerHTML="<p>No matching tasks.</p>"}),M.forEach(n=>{n.addEventListener("click",()=>{G="add",J=null,Y.reset(),x.classList.add("overlay-active"),Y.classList.add("new-task-modal-active")})}),D.addEventListener("click",()=>{en()});let G="add",J=null;function K(){const n=document.getElementById("title").value,e=document.getElementById("description").value,t=document.getElementById("date").value,r=document.querySelector('input[name="priority"]:checked')?.value;return{title:n,description:e,dueDate:t,priority:r,notes:document.getElementById("notes").value,project:document.getElementById("project").value}}function nn({title:n,description:e,dueDate:t}){return!!(n&&e&&t)||(alert("Nope"),!1)}function en(){x.classList.remove("overlay-active"),Y.classList.remove("new-task-modal-active")}function tn(){const n=I.querySelector(".delete-task");n&&n.addEventListener("click",()=>{const e=Number(n.getAttribute("data-task-index"));q.splice(e,1),U(),Q(),_(),V();const t=e<q.length?e:q.length-1,r=j.querySelector(`[data-index="${t}"]`);r?(R(r),F(),P(),tn()):I.innerHTML="<p>No tasks yet.</p>"})}Y.addEventListener("submit",n=>{n.preventDefault(),"add"===G?function(){const n=K();nn(n)&&(q.push(new z(n)),T(),U(),Q(),V(),en())}():"edit"===G&&function(n){const e=K();nn(e)&&(q[n]=new z(e),T(),U(),Q(),_(),V(),R(j.querySelector(`[data-index="${n}"]`)),F(),P(),en())}(J)})})()})();
+(() => {
+  var n = {
+      911(n, e, t) {
+        "use strict";
+        t.d(e, { A: () => i });
+        var r = t(354),
+          o = t.n(r),
+          A = t(314),
+          a = t.n(A)()(o());
+        a.push([
+          n.id,
+          '* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\n:root {\n  --primary-color: #0466c8;\n  --header-background: #f3f6f9;\n  --header-border-color: #e8ebee;\n  --searchbar-background: #d5dde6;\n  --left-sidebar-background: #152333;\n  --task-backgroud: #fff;\n  --high-task-priority: #c00d0d;\n}\n\nbody {\n  padding-top: 6rem;\n  background-color: var(--header-background);\n  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;\n}\n\n.container {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n\n  max-width: 80vw;\n  margin-left: auto;\n  margin-right: auto;\n}\n\nheader {\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  height: 4rem;\n\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  background-color: var(--header-background);\n  padding: 1rem 1.2rem;\n  border-bottom: 1px solid var(--header-border-color);\n  z-index: 999;\n}\n\n.left-section {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n\n  width: 50%;\n}\n\n.menu-toggle,\n.theme-toggle,\n.close-menu {\n  background-color: transparent;\n  border: none;\n  border-radius: 4px;\n  padding: 0.2rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.menu-toggle:hover,\n.theme-toggle:hover,\n.close-menu:hover {\n  background-color: var(--searchbar-background);\n}\n\n.close-menu {\n  position: absolute;\n  right: -2.5rem;\n  z-index: 1001;\n  display: none;\n  background-color: #e3e6e9;\n}\n\n.close-menu-active {\n  display: block;\n}\n\n.left-section .logo {\n  display: none;\n}\n\n.search {\n  display: flex;\n  width: 100%;\n  position: relative;\n}\n\n.search input {\n  height: 35px;\n  width: 100%;\n  border-radius: 5px;\n  padding: 0.3rem 1.5rem;\n  border: none;\n  background-color: var(--searchbar-background);\n}\n\n.search input:focus {\n  outline: 2px solid var(--primary-color);\n}\n\n.search-icon {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n\n  z-index: 1;\n}\n\nheader .right-section {\n  display: flex;\n  align-items: center;\n  gap: 1.5rem;\n}\n\n.overlay {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  z-index: 1000;\n  display: none;\n}\n\n.overlay-active {\n  display: block;\n}\n\n.tasks-container {\n  display: flex;\n  flex-direction: column;\n  gap: 1.5rem;\n}\n\n.filter-title {\n  margin-bottom: 1rem;\n  margin-left: .5rem;\n  text-transform: capitalize;\n}\n\n.tasks-container .task {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  position: relative;\n\n  height: 5rem;\n  background: var(--task-backgroud);\n  padding: 1rem;\n  border-radius: 5px;\n  box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.05);\n  transition:\n    transform 0.3s ease,\n    box-shadow 0.3s ease;\n  cursor: pointer;\n}\n\n.task:hover {\n  transform: translateY(-2px);\n  box-shadow: 3px -3px 25px rgba(0, 0, 0, 0.1);\n}\n\n.task-active {\n  border: 1px solid #d6dee9;\n}\n\n.task .start,\n.task .end {\n  display: flex;\n}\n\n.task .start {\n  gap: 1rem;\n}\n\n.task .end {\n  gap: 1.5rem;\n}\n\n.task .description,\n.task .due-date {\n  color: #798592;\n  font-size: 0.9rem;\n}\n\n.task .description {\n  width: 50%;\n  display: -webkit-box;\n  -webkit-line-clamp: 1;\n  line-clamp: 1;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n\n  position: absolute;\n  top: 5px;\n}\n\n.task .due-date {\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n\n.task .priority {\n  padding: 0.4rem 1rem;\n  border-radius: 5px;\n}\n\n.low-priority {\n  background-color: #3fbf8e;\n  color: #282d38;\n}\n\n.medium-priority {\n  background-color: #ebd03ce5;\n  color: #313942;\n}\n\n.high-priority {\n  background-color: var(--high-task-priority);\n  color: #f2f3f5;\n}\n\n.task .project,\n.task-essentials .project-name {\n  display: flex;\n  align-items: center;\n  gap: .5rem;\n\n  background-color: #024991;\n  color: #d5dde6;\n  padding: .3rem .5rem;\n  border-radius: 15px;\n\n  img {\n    width: 15px;\n    height: 15px;\n  }\n}\n\n.left-sidebar {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  transform: translateX(clamp(-200px, 2.5vw, -15rem));\n  width: clamp(200px, 2.5vw, 15rem);\n  z-index: 1003;\n  transition: transform 0.3s ease;\n\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n\n  background-color: var(--left-sidebar-background);\n  padding: 2rem 0.7rem;\n}\n\n.logo {\n  display: flex;\n  align-items: center;\n  gap: 0.3rem;\n\n  font-weight: bold;\n  font-size: clamp(1rem, 2.5vw, 1.6rem);\n  color: var(--primary-color);\n  margin-bottom: 2rem;\n}\n\n.left-sidebar.open {\n  transform: translateX(0);\n}\n\n.left-sidebar .top {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  margin-bottom: 1rem;\n}\n\n.left-sidebar button:not(.new-task-button, .close-menu) {\n  background-color: transparent;\n  border: none;\n  border-radius: 5px;\n  padding: 0.3rem 1rem;\n  color: var(--searchbar-background);\n  font-size: 1rem;\n  cursor: pointer;\n  transition: background-color 0.2s ease;\n\n  display: flex;\n  align-items: center;\n  gap: 0.3rem;\n\n  img {\n    order: -1;\n  }\n}\n\n.left-sidebar button:hover:not(.new-task-button, .close-menu) {\n  background-color: rgba(255, 255, 255, 0.08);\n}\n\n.left-sidebar button.filter-active {\n  background-color: rgba(255, 255, 255, 0.08);\n}\n\ndetails summary {\n  cursor: pointer;\n  list-style: none;\n  outline: none;\n  margin-bottom: 1rem;\n  color: var(--searchbar-background);\n  font-size: 1rem;\n  padding: 0.3rem 1rem;\n\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\ndetails[open] summary .chevron {\n  transform: rotate(180deg);\n}\n\ndetails nav ul {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n}\n\ndetails button {\n  width: 100%;\n}\n\n.new-task-button {\n  margin-top: auto;\n  background-color: var(--primary-color);\n  border: none;\n  padding: 0.6rem;\n  border-radius: 5px;\n  color: var(--searchbar-background);\n  font-size: 0.9rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.new-task-button:hover {\n  background-color: #0354a5;\n}\n\n.new-task-button:active {\n  transform: scale(0.99);\n}\n\n.right-sidebar {\n  border-left: 1px solid #e8ebee;\n  background-color: #152333;\n  padding: 1.5rem .8rem 2rem 1.5rem;\n  border-radius: 10px 10px 0 0;\n  height: 18rem;\n\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n\n  display: flex;\n  flex-direction: column;\n\n  transform: translateY(18rem);\n  transition: transform 0.3s ease;\n}\n\n/* WebKit (Chrome/Safari) */\n.task-essentials::-webkit-scrollbar {\n  width: 8px;\n} \n\n\n.task-essentials::-webkit-scrollbar-track {\n  background: transparent; /* Makes the track blend in */\n}\n\n\n.task-essentials::-webkit-scrollbar-thumb {\n  background-color: rgba(255, 255, 255, 0.2); /* Subtle grey thumb */\n  border-radius: 20px;\n  border: 1px solid transparent; /* Creates a \'floating\' gap */\n  background-clip: content-box;\n}\n\n\n.task-essentials::-webkit-scrollbar-thumb:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.task-essentials {\n  overflow-y: auto;\n  flex: 1;\n  padding: 0 .5rem;\n}\n\n.notes {\n  background-color: #e2e9f0;\n  color: #68717c;\n  padding: .5rem 1rem;\n  line-height: 1.3;\n  border-radius: 4px;\n}\n\n.close-right-sidebar {\n  position: absolute;\n  left: 50%;\n  top: -2rem;\n  transform: translateX(-50%);\n\n  background-color: transparent;\n  border: none;\n  cursor: pointer;\n  z-index: 1002;\n  display: none;\n}\n\n.close-right-sidebar-active {\n  display: block;\n}\n\n.right-sidebar-visible {\n  transform: translateY(0);\n}\n\n.right-sidebar h3,\n.right-sidebar h4 {\n  color: #c7cdd4;\n  text-align: center;\n}\n\n.right-sidebar h4 {\n  margin: 1rem 0;\n}\n\n.right-sidebar .task-title {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n\n.completed {\n  display: none;\n  align-items: center;\n  gap: .3rem;\n  color: #3fbf8e;\n}\n\n.completed-visible {\n  display: flex;\n}\n\n.right-sidebar .description {\n  background-color: #e2e9f0;\n  line-height: 1.3;\n  color: #374f68;\n  padding: 0.3rem 1rem;\n  border-radius: 5px;\n  margin: 0.8rem 0 1.5rem 0;\n  position: relative;\n}\n\n.right-sidebar .subtasks {\n  position: relative;\n  margin: 0.8rem 0 1.8rem 0;\n}\n\n.right-sidebar .project-container {\n  position: relative;\n  margin: 0.8rem 0 1.8rem 0;\n}\n\n.right-sidebar .description::after,\n.right-sidebar .project-container::after,\n.right-sidebar .subtasks::after {\n  content: "";\n  height: 1px;\n  background-color: #67788b;\n\n  position: absolute;\n  bottom: -15px;\n  left: 0;\n  right: 0;\n}\n\n.subtask,\n.right-sidebar .due-date p:first-of-type,\n.right-sidebar .priority p:first-of-type,\n.right-sidebar .project-container p:first-of-type {\n  color: #d5dde6;\n  font-weight: bold;\n}\n\n.right-sidebar .due-date,\n.right-sidebar .priority,\n.right-sidebar .project-container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.right-sidebar .priority {\n  position: relative;\n  margin: 0.8rem 0 1.5rem 0;\n}\n\n.right-sidebar .due-date {\n  margin-bottom: 1rem;\n}\n\n.right-sidebar .due-date p:nth-of-type(2) {\n  background-color: rgba(255, 255, 255, 0.2);\n  color: #b6c0cc;\n  padding: 0.5rem 0.9rem;\n  border-radius: 5px;\n}\n\n.right-sidebar .priority p:nth-of-type(2) {\n  padding: 0.3rem 0.9rem;\n  border-radius: 5px;\n}\n\n.edit-task {\n  background-color: transparent;\n  border: none;\n  cursor: pointer;\n  position: relative;\n\n  display: flex;\n  gap: 1rem;\n}\n\n.edit-task::after {\n  position: absolute;\n  bottom: -5px;\n  left: 0;\n  right: 0;\n\n  height: 2px;\n  background-color: #67788b;\n  content: "";\n  display: none;\n}\n\n.edit-task:hover::after {\n  display: block;\n}\n\n.delete-task {\n  margin-top: 3rem;\n  width: 100%;\n  padding: .6rem;\n  border-radius: 4px;\n  border: none;\n  background-color: #b91a1a;\n  color: #f2f2f2;\n  font-size: .9rem;\n  cursor: pointer;\n  transition: background-color .2s ease;\n}\n\n.delete-task:hover {\n  background-color: #d11f1f;\n}\n\n.delete-task:active {\n  transform: scale(.99);\n}\n\n/* Hide by default for mouse users */\n.touch-only-card {\n  display: none;\n  position: fixed;\n  top: 5px;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 1005;\n\n  background-color: rgba(0, 0, 0, 0.8);\n  color: #d5dde6;\n  padding: .5rem .7rem;\n  border-radius: 5px;\n  animation: blink 10s forwards;\n}\n\n@keyframes blink {\n  0% {\n    opacity: 0;\n  }\n\n  30% {\n    opacity: .5;\n  }\n\n  50% {\n    opacity: 1;\n  }\n\n  80% {\n    opacity: .5;\n  }\n\n  100% {\n    display: none;\n  }\n}\n\n/* Show only on touch devices */\n@media (pointer: coarse) {\n  .touch-only-card {\n    display: block;\n  }\n}\n\n\n@media (min-width: 900px) {\n  .container {\n    grid-template-columns: 1fr 0.5fr;\n    gap: 1.5rem;\n    padding-left: clamp(180px, 2.5vw, 15rem);\n    max-width: unset;\n  }\n\n  .tasks-container {\n    min-width: 0;\n  }\n\n  .left-section {\n    gap: 1rem;\n  }\n\n  .left-section .logo {\n    display: flex;\n    margin-bottom: 0;\n    font-size: 1.5rem;\n  }\n\n  .right-sidebar {\n    right: 0;\n    bottom: 0;\n    top: 4rem;\n    left: auto;\n\n    border-radius: 0px;\n    padding: 0.6rem 1.5rem;\n    background: linear-gradient(180deg, #374f68 0%, #152333 100%);\n    padding: 1.5rem;\n    height: 100%;\n    width: 25vw;\n    transform: translateY(0);\n  }\n\n  .right-sidebar .description {\n    word-wrap: break-word;\n  }\n\n  .close-right-sidebar-active {\n    display: none;\n  }\n}\n',
+          "",
+          {
+            version: 3,
+            sources: ["webpack://./src/general.css"],
+            names: [],
+            mappings:
+              "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",
+            sourcesContent: [
+              '* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\n:root {\n  --primary-color: #0466c8;\n  --header-background: #f3f6f9;\n  --header-border-color: #e8ebee;\n  --searchbar-background: #d5dde6;\n  --left-sidebar-background: #152333;\n  --task-backgroud: #fff;\n  --high-task-priority: #c00d0d;\n}\n\nbody {\n  padding-top: 6rem;\n  background-color: var(--header-background);\n  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;\n}\n\n.container {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 1.5rem;\n\n  max-width: 80vw;\n  margin-left: auto;\n  margin-right: auto;\n}\n\nheader {\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  height: 4rem;\n\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  background-color: var(--header-background);\n  padding: 1rem 1.2rem;\n  border-bottom: 1px solid var(--header-border-color);\n  z-index: 999;\n}\n\n.left-section {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n\n  width: 50%;\n}\n\n.menu-toggle,\n.theme-toggle,\n.close-menu {\n  background-color: transparent;\n  border: none;\n  border-radius: 4px;\n  padding: 0.2rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.menu-toggle:hover,\n.theme-toggle:hover,\n.close-menu:hover {\n  background-color: var(--searchbar-background);\n}\n\n.close-menu {\n  position: absolute;\n  right: -2.5rem;\n  z-index: 1001;\n  display: none;\n  background-color: #e3e6e9;\n}\n\n.close-menu-active {\n  display: block;\n}\n\n.left-section .logo {\n  display: none;\n}\n\n.search {\n  display: flex;\n  width: 100%;\n  position: relative;\n}\n\n.search input {\n  height: 35px;\n  width: 100%;\n  border-radius: 5px;\n  padding: 0.3rem 1.5rem;\n  border: none;\n  background-color: var(--searchbar-background);\n}\n\n.search input:focus {\n  outline: 2px solid var(--primary-color);\n}\n\n.search-icon {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n\n  z-index: 1;\n}\n\nheader .right-section {\n  display: flex;\n  align-items: center;\n  gap: 1.5rem;\n}\n\n.overlay {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  z-index: 1000;\n  display: none;\n}\n\n.overlay-active {\n  display: block;\n}\n\n.tasks-container {\n  display: flex;\n  flex-direction: column;\n  gap: 1.5rem;\n}\n\n.filter-title {\n  margin-bottom: 1rem;\n  margin-left: .5rem;\n  text-transform: capitalize;\n}\n\n.tasks-container .task {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  position: relative;\n\n  height: 5rem;\n  background: var(--task-backgroud);\n  padding: 1rem;\n  border-radius: 5px;\n  box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.05);\n  transition:\n    transform 0.3s ease,\n    box-shadow 0.3s ease;\n  cursor: pointer;\n}\n\n.task:hover {\n  transform: translateY(-2px);\n  box-shadow: 3px -3px 25px rgba(0, 0, 0, 0.1);\n}\n\n.task-active {\n  border: 1px solid #d6dee9;\n}\n\n.task .start,\n.task .end {\n  display: flex;\n}\n\n.task .start {\n  gap: 1rem;\n}\n\n.task .end {\n  gap: 1.5rem;\n}\n\n.task .description,\n.task .due-date {\n  color: #798592;\n  font-size: 0.9rem;\n}\n\n.task .description {\n  width: 50%;\n  display: -webkit-box;\n  -webkit-line-clamp: 1;\n  line-clamp: 1;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n\n  position: absolute;\n  top: 5px;\n}\n\n.task .due-date {\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n\n.task .priority {\n  padding: 0.4rem 1rem;\n  border-radius: 5px;\n}\n\n.low-priority {\n  background-color: #3fbf8e;\n  color: #282d38;\n}\n\n.medium-priority {\n  background-color: #ebd03ce5;\n  color: #313942;\n}\n\n.high-priority {\n  background-color: var(--high-task-priority);\n  color: #f2f3f5;\n}\n\n.task .project,\n.task-essentials .project-name {\n  display: flex;\n  align-items: center;\n  gap: .5rem;\n\n  background-color: #024991;\n  color: #d5dde6;\n  padding: .3rem .5rem;\n  border-radius: 15px;\n\n  img {\n    width: 15px;\n    height: 15px;\n  }\n}\n\n.left-sidebar {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  transform: translateX(clamp(-200px, 2.5vw, -15rem));\n  width: clamp(200px, 2.5vw, 15rem);\n  z-index: 1003;\n  transition: transform 0.3s ease;\n\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n\n  background-color: var(--left-sidebar-background);\n  padding: 2rem 0.7rem;\n}\n\n.logo {\n  display: flex;\n  align-items: center;\n  gap: 0.3rem;\n\n  font-weight: bold;\n  font-size: clamp(1rem, 2.5vw, 1.6rem);\n  color: var(--primary-color);\n  margin-bottom: 2rem;\n}\n\n.left-sidebar.open {\n  transform: translateX(0);\n}\n\n.left-sidebar .top {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  margin-bottom: 1rem;\n}\n\n.left-sidebar button:not(.new-task-button, .close-menu) {\n  background-color: transparent;\n  border: none;\n  border-radius: 5px;\n  padding: 0.3rem 1rem;\n  color: var(--searchbar-background);\n  font-size: 1rem;\n  cursor: pointer;\n  transition: background-color 0.2s ease;\n\n  display: flex;\n  align-items: center;\n  gap: 0.3rem;\n\n  img {\n    order: -1;\n  }\n}\n\n.left-sidebar button:hover:not(.new-task-button, .close-menu) {\n  background-color: rgba(255, 255, 255, 0.08);\n}\n\n.left-sidebar button.filter-active {\n  background-color: rgba(255, 255, 255, 0.08);\n}\n\ndetails summary {\n  cursor: pointer;\n  list-style: none;\n  outline: none;\n  margin-bottom: 1rem;\n  color: var(--searchbar-background);\n  font-size: 1rem;\n  padding: 0.3rem 1rem;\n\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\ndetails[open] summary .chevron {\n  transform: rotate(180deg);\n}\n\ndetails nav ul {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n}\n\ndetails button {\n  width: 100%;\n}\n\n.new-task-button {\n  margin-top: auto;\n  background-color: var(--primary-color);\n  border: none;\n  padding: 0.6rem;\n  border-radius: 5px;\n  color: var(--searchbar-background);\n  font-size: 0.9rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.new-task-button:hover {\n  background-color: #0354a5;\n}\n\n.new-task-button:active {\n  transform: scale(0.99);\n}\n\n.right-sidebar {\n  border-left: 1px solid #e8ebee;\n  background-color: #152333;\n  padding: 1.5rem .8rem 2rem 1.5rem;\n  border-radius: 10px 10px 0 0;\n  height: 18rem;\n\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n\n  display: flex;\n  flex-direction: column;\n\n  transform: translateY(18rem);\n  transition: transform 0.3s ease;\n}\n\n/* WebKit (Chrome/Safari) */\n.task-essentials::-webkit-scrollbar {\n  width: 8px;\n} \n\n\n.task-essentials::-webkit-scrollbar-track {\n  background: transparent; /* Makes the track blend in */\n}\n\n\n.task-essentials::-webkit-scrollbar-thumb {\n  background-color: rgba(255, 255, 255, 0.2); /* Subtle grey thumb */\n  border-radius: 20px;\n  border: 1px solid transparent; /* Creates a \'floating\' gap */\n  background-clip: content-box;\n}\n\n\n.task-essentials::-webkit-scrollbar-thumb:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.task-essentials {\n  overflow-y: auto;\n  flex: 1;\n  padding: 0 .5rem;\n}\n\n.notes {\n  background-color: #e2e9f0;\n  color: #68717c;\n  padding: .5rem 1rem;\n  line-height: 1.3;\n  border-radius: 4px;\n}\n\n.close-right-sidebar {\n  position: absolute;\n  left: 50%;\n  top: -2rem;\n  transform: translateX(-50%);\n\n  background-color: transparent;\n  border: none;\n  cursor: pointer;\n  z-index: 1002;\n  display: none;\n}\n\n.close-right-sidebar-active {\n  display: block;\n}\n\n.right-sidebar-visible {\n  transform: translateY(0);\n}\n\n.right-sidebar h3,\n.right-sidebar h4 {\n  color: #c7cdd4;\n  text-align: center;\n}\n\n.right-sidebar h4 {\n  margin: 1rem 0;\n}\n\n.right-sidebar .task-title {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.5rem;\n}\n\n.completed {\n  display: none;\n  align-items: center;\n  gap: .3rem;\n  color: #3fbf8e;\n}\n\n.completed-visible {\n  display: flex;\n}\n\n.right-sidebar .description {\n  background-color: #e2e9f0;\n  line-height: 1.3;\n  color: #374f68;\n  padding: 0.3rem 1rem;\n  border-radius: 5px;\n  margin: 0.8rem 0 1.5rem 0;\n  position: relative;\n}\n\n.right-sidebar .subtasks {\n  position: relative;\n  margin: 0.8rem 0 1.8rem 0;\n}\n\n.right-sidebar .project-container {\n  position: relative;\n  margin: 0.8rem 0 1.8rem 0;\n}\n\n.right-sidebar .description::after,\n.right-sidebar .project-container::after,\n.right-sidebar .subtasks::after {\n  content: "";\n  height: 1px;\n  background-color: #67788b;\n\n  position: absolute;\n  bottom: -15px;\n  left: 0;\n  right: 0;\n}\n\n.subtask,\n.right-sidebar .due-date p:first-of-type,\n.right-sidebar .priority p:first-of-type,\n.right-sidebar .project-container p:first-of-type {\n  color: #d5dde6;\n  font-weight: bold;\n}\n\n.right-sidebar .due-date,\n.right-sidebar .priority,\n.right-sidebar .project-container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.right-sidebar .priority {\n  position: relative;\n  margin: 0.8rem 0 1.5rem 0;\n}\n\n.right-sidebar .due-date {\n  margin-bottom: 1rem;\n}\n\n.right-sidebar .due-date p:nth-of-type(2) {\n  background-color: rgba(255, 255, 255, 0.2);\n  color: #b6c0cc;\n  padding: 0.5rem 0.9rem;\n  border-radius: 5px;\n}\n\n.right-sidebar .priority p:nth-of-type(2) {\n  padding: 0.3rem 0.9rem;\n  border-radius: 5px;\n}\n\n.edit-task {\n  background-color: transparent;\n  border: none;\n  cursor: pointer;\n  position: relative;\n\n  display: flex;\n  gap: 1rem;\n}\n\n.edit-task::after {\n  position: absolute;\n  bottom: -5px;\n  left: 0;\n  right: 0;\n\n  height: 2px;\n  background-color: #67788b;\n  content: "";\n  display: none;\n}\n\n.edit-task:hover::after {\n  display: block;\n}\n\n.delete-task {\n  margin-top: 3rem;\n  width: 100%;\n  padding: .6rem;\n  border-radius: 4px;\n  border: none;\n  background-color: #b91a1a;\n  color: #f2f2f2;\n  font-size: .9rem;\n  cursor: pointer;\n  transition: background-color .2s ease;\n}\n\n.delete-task:hover {\n  background-color: #d11f1f;\n}\n\n.delete-task:active {\n  transform: scale(.99);\n}\n\n/* Hide by default for mouse users */\n.touch-only-card {\n  display: none;\n  position: fixed;\n  top: 5px;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 1005;\n\n  background-color: rgba(0, 0, 0, 0.8);\n  color: #d5dde6;\n  padding: .5rem .7rem;\n  border-radius: 5px;\n  animation: blink 10s forwards;\n}\n\n@keyframes blink {\n  0% {\n    opacity: 0;\n  }\n\n  30% {\n    opacity: .5;\n  }\n\n  50% {\n    opacity: 1;\n  }\n\n  80% {\n    opacity: .5;\n  }\n\n  100% {\n    display: none;\n  }\n}\n\n/* Show only on touch devices */\n@media (pointer: coarse) {\n  .touch-only-card {\n    display: block;\n  }\n}\n\n\n@media (min-width: 900px) {\n  .container {\n    grid-template-columns: 1fr 0.5fr;\n    gap: 1.5rem;\n    padding-left: clamp(180px, 2.5vw, 15rem);\n    max-width: unset;\n  }\n\n  .tasks-container {\n    min-width: 0;\n  }\n\n  .left-section {\n    gap: 1rem;\n  }\n\n  .left-section .logo {\n    display: flex;\n    margin-bottom: 0;\n    font-size: 1.5rem;\n  }\n\n  .right-sidebar {\n    right: 0;\n    bottom: 0;\n    top: 4rem;\n    left: auto;\n\n    border-radius: 0px;\n    padding: 0.6rem 1.5rem;\n    background: linear-gradient(180deg, #374f68 0%, #152333 100%);\n    padding: 1.5rem;\n    height: 100%;\n    width: 25vw;\n    transform: translateY(0);\n  }\n\n  .right-sidebar .description {\n    word-wrap: break-word;\n  }\n\n  .close-right-sidebar-active {\n    display: none;\n  }\n}\n',
+            ],
+            sourceRoot: "",
+          },
+        ]);
+        const i = a;
+      },
+      95(n, e, t) {
+        "use strict";
+        t.d(e, { A: () => i });
+        var r = t(354),
+          o = t.n(r),
+          A = t(314),
+          a = t.n(A)()(o());
+        a.push([
+          n.id,
+          '.new-task-modal {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n\n  z-index: 1002;\n\n  background-color: #fff;\n  padding: 1.5rem;\n  border-radius: 10px;\n  display: none;\n}\n\n.new-task-modal-active {\n  display: block;\n}\n\n.new-task-modal h4 {\n  margin-bottom: 1rem;\n}\n\n.required {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n\n  margin-bottom: 1rem;\n}\n\n.required label {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n\n.required input {\n  border: 1px solid #a0aec0;\n  border-radius: 3px;\n  padding: 0.3rem 0.5rem;\n}\n\n.required input[type="text"]:focus {\n  outline: 1px solid #0b7ef1;\n}\n\n.new-task-modal fieldset {\n  margin-bottom: 1rem;\n  border: 2px solid #d5dde6;\n  border-radius: 5px;\n  padding: 0.8rem;\n\n  display: flex;\n  flex-direction: column;\n  gap: 0.7rem;\n}\n\n.new-task-modal fieldset input,\n.new-task-modal fieldset label {\n  cursor: pointer;\n}\n\n.new-task-modal legend {\n  background-color: #152333;\n  color: #e8ebee;\n  padding: 5px 15px;\n  border-radius: 4px;\n  font-weight: bold;\n}\n\n.new-task-modal textarea {\n  resize: none;\n  width: 100%;\n  height: 100px;\n  margin-bottom: 1rem;\n  border: 1px solid #a0aec0;\n  border-radius: 4px;\n  padding: 8px;\n}\n\nselect, \n::picker(select) {\n  appearance: base-select;\n}\n\nselect {\n  width: 100%;\n  padding: .3rem .5rem;\n  border: 1px solid #a0aec0;\n  border-radius: 4px;\n  background-color: #dfe5eb;\n  cursor: pointer;\n}\n\nselect:hover,\nselect:focus {\n  background-color: #d5dde6;\n}\n\nselect:focus,\nselect:open {\n  border: 1px solid #0d74db;\n}\n\n.required .form-row:nth-of-type(3) {\n  position: relative;\n  width: 100%;\n}\n\nselect::picker-icon {\n  display: none;\n}\n\n.picker-icon {\n  position: absolute;\n  right: .2rem;\n  bottom: 20px;\n  transition: transform .4s ease;\n}\n\nselect:open ~ .picker-icon {\n  transform: rotate(180deg);\n}\n\n::picker(select) {\n  border: 1px solid #a0aec0;\n  border: none;\n  border-radius: .4rem;\n  opacity: 0;\n  padding: 1rem 0;\n  background-color: #d0d8e4;\n  top: calc(anchor(bottom) + 1px);\n  transition: all .3s allow-discrete;\n}\n\n::picker(select):popover-open {\n  opacity: 1;\n}\n\n@starting-style {\n  ::picker(select):open {\n    opacity: 0;\n  }\n}\n\n\noption {\n  display: flex;\n  cursor: pointer;\n  padding: .4rem 1rem;\n}\n\noption:hover {\n  background-color: #d7e0ec;\n  color: #0b7ef1;\n}\n\noption:checked {\n  font-weight: bold;\n  color: #0b7ef1;\n}\n\noption:not(option:last-of-type) {\n  margin-bottom: .4rem;\n}\n\noption::checkmark {\n  content: "✅";\n  font-size: .9rem;\n  order: 1;\n  margin-left: auto;\n}\n\ninput[type="date"] {\n  width: 100%;\n}\n\n.new-task-modal textarea:focus {\n  outline: 1px solid #0b7ef1;\n}\n\n.new-task-modal select {\n  margin-bottom: 1rem;\n}\n\n.buttons {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n}\n\n.buttons button {\n  padding: 0.4rem 1rem;\n  cursor: pointer;\n  font-size: 0.9rem;\n  border-radius: 4px;\n}\n\n.buttons button:active {\n  transform: scale(0.98);\n}\n\n.buttons button[type="submit"] {\n  background-color: #0d74db;\n  color: #fff;\n  border: none;\n  transition: background-color 0.3s ease;\n}\n\n.buttons button[type="button"] {\n  background-color: transparent;\n  border: 2px solid #0d74db;\n  transition:\n    background-color 0.3s ease,\n    color 0.3s ease;\n}\n\n.buttons button[type="submit"]:hover {\n  background-color: #0862bb;\n}\n\n.buttons button[type="button"]:hover {\n  background-color: #0d74db;\n  color: #fff;\n}\n',
+          "",
+          {
+            version: 3,
+            sources: ["webpack://./src/new-task-modal.css"],
+            names: [],
+            mappings:
+              "AAAA;EACE,eAAe;EACf,QAAQ;EACR,SAAS;EACT,gCAAgC;;EAEhC,aAAa;;EAEb,sBAAsB;EACtB,eAAe;EACf,mBAAmB;EACnB,aAAa;AACf;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,8BAA8B;EAC9B,SAAS;;EAET,mBAAmB;AACrB;;AAEA;EACE,cAAc;EACd,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,kBAAkB;EAClB,sBAAsB;AACxB;;AAEA;EACE,0BAA0B;AAC5B;;AAEA;EACE,mBAAmB;EACnB,yBAAyB;EACzB,kBAAkB;EAClB,eAAe;;EAEf,aAAa;EACb,sBAAsB;EACtB,WAAW;AACb;;AAEA;;EAEE,eAAe;AACjB;;AAEA;EACE,yBAAyB;EACzB,cAAc;EACd,iBAAiB;EACjB,kBAAkB;EAClB,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,WAAW;EACX,aAAa;EACb,mBAAmB;EACnB,yBAAyB;EACzB,kBAAkB;EAClB,YAAY;AACd;;AAEA;;EAEE,uBAAuB;AACzB;;AAEA;EACE,WAAW;EACX,oBAAoB;EACpB,yBAAyB;EACzB,kBAAkB;EAClB,yBAAyB;EACzB,eAAe;AACjB;;AAEA;;EAEE,yBAAyB;AAC3B;;AAEA;;EAEE,yBAAyB;AAC3B;;AAEA;EACE,kBAAkB;EAClB,WAAW;AACb;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,kBAAkB;EAClB,YAAY;EACZ,YAAY;EACZ,8BAA8B;AAChC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,oBAAoB;EACpB,UAAU;EACV,eAAe;EACf,yBAAyB;EACzB,+BAA+B;EAC/B,kCAAkC;AACpC;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE;IACE,UAAU;EACZ;AACF;;;AAGA;EACE,aAAa;EACb,eAAe;EACf,mBAAmB;AACrB;;AAEA;EACE,yBAAyB;EACzB,cAAc;AAChB;;AAEA;EACE,iBAAiB;EACjB,cAAc;AAChB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,YAAY;EACZ,gBAAgB;EAChB,QAAQ;EACR,iBAAiB;AACnB;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,0BAA0B;AAC5B;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,8BAA8B;EAC9B,SAAS;AACX;;AAEA;EACE,oBAAoB;EACpB,eAAe;EACf,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,sBAAsB;AACxB;;AAEA;EACE,yBAAyB;EACzB,WAAW;EACX,YAAY;EACZ,sCAAsC;AACxC;;AAEA;EACE,6BAA6B;EAC7B,yBAAyB;EACzB;;mBAEiB;AACnB;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;EACzB,WAAW;AACb",
+            sourcesContent: [
+              '.new-task-modal {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n\n  z-index: 1002;\n\n  background-color: #fff;\n  padding: 1.5rem;\n  border-radius: 10px;\n  display: none;\n}\n\n.new-task-modal-active {\n  display: block;\n}\n\n.new-task-modal h4 {\n  margin-bottom: 1rem;\n}\n\n.required {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n\n  margin-bottom: 1rem;\n}\n\n.required label {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n\n.required input {\n  border: 1px solid #a0aec0;\n  border-radius: 3px;\n  padding: 0.3rem 0.5rem;\n}\n\n.required input[type="text"]:focus {\n  outline: 1px solid #0b7ef1;\n}\n\n.new-task-modal fieldset {\n  margin-bottom: 1rem;\n  border: 2px solid #d5dde6;\n  border-radius: 5px;\n  padding: 0.8rem;\n\n  display: flex;\n  flex-direction: column;\n  gap: 0.7rem;\n}\n\n.new-task-modal fieldset input,\n.new-task-modal fieldset label {\n  cursor: pointer;\n}\n\n.new-task-modal legend {\n  background-color: #152333;\n  color: #e8ebee;\n  padding: 5px 15px;\n  border-radius: 4px;\n  font-weight: bold;\n}\n\n.new-task-modal textarea {\n  resize: none;\n  width: 100%;\n  height: 100px;\n  margin-bottom: 1rem;\n  border: 1px solid #a0aec0;\n  border-radius: 4px;\n  padding: 8px;\n}\n\nselect, \n::picker(select) {\n  appearance: base-select;\n}\n\nselect {\n  width: 100%;\n  padding: .3rem .5rem;\n  border: 1px solid #a0aec0;\n  border-radius: 4px;\n  background-color: #dfe5eb;\n  cursor: pointer;\n}\n\nselect:hover,\nselect:focus {\n  background-color: #d5dde6;\n}\n\nselect:focus,\nselect:open {\n  border: 1px solid #0d74db;\n}\n\n.required .form-row:nth-of-type(3) {\n  position: relative;\n  width: 100%;\n}\n\nselect::picker-icon {\n  display: none;\n}\n\n.picker-icon {\n  position: absolute;\n  right: .2rem;\n  bottom: 20px;\n  transition: transform .4s ease;\n}\n\nselect:open ~ .picker-icon {\n  transform: rotate(180deg);\n}\n\n::picker(select) {\n  border: 1px solid #a0aec0;\n  border: none;\n  border-radius: .4rem;\n  opacity: 0;\n  padding: 1rem 0;\n  background-color: #d0d8e4;\n  top: calc(anchor(bottom) + 1px);\n  transition: all .3s allow-discrete;\n}\n\n::picker(select):popover-open {\n  opacity: 1;\n}\n\n@starting-style {\n  ::picker(select):open {\n    opacity: 0;\n  }\n}\n\n\noption {\n  display: flex;\n  cursor: pointer;\n  padding: .4rem 1rem;\n}\n\noption:hover {\n  background-color: #d7e0ec;\n  color: #0b7ef1;\n}\n\noption:checked {\n  font-weight: bold;\n  color: #0b7ef1;\n}\n\noption:not(option:last-of-type) {\n  margin-bottom: .4rem;\n}\n\noption::checkmark {\n  content: "✅";\n  font-size: .9rem;\n  order: 1;\n  margin-left: auto;\n}\n\ninput[type="date"] {\n  width: 100%;\n}\n\n.new-task-modal textarea:focus {\n  outline: 1px solid #0b7ef1;\n}\n\n.new-task-modal select {\n  margin-bottom: 1rem;\n}\n\n.buttons {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n}\n\n.buttons button {\n  padding: 0.4rem 1rem;\n  cursor: pointer;\n  font-size: 0.9rem;\n  border-radius: 4px;\n}\n\n.buttons button:active {\n  transform: scale(0.98);\n}\n\n.buttons button[type="submit"] {\n  background-color: #0d74db;\n  color: #fff;\n  border: none;\n  transition: background-color 0.3s ease;\n}\n\n.buttons button[type="button"] {\n  background-color: transparent;\n  border: 2px solid #0d74db;\n  transition:\n    background-color 0.3s ease,\n    color 0.3s ease;\n}\n\n.buttons button[type="submit"]:hover {\n  background-color: #0862bb;\n}\n\n.buttons button[type="button"]:hover {\n  background-color: #0d74db;\n  color: #fff;\n}\n',
+            ],
+            sourceRoot: "",
+          },
+        ]);
+        const i = a;
+      },
+      314(n) {
+        "use strict";
+        n.exports = function (n) {
+          var e = [];
+          return (
+            (e.toString = function () {
+              return this.map(function (e) {
+                var t = "",
+                  r = void 0 !== e[5];
+                return (
+                  e[4] && (t += "@supports (".concat(e[4], ") {")),
+                  e[2] && (t += "@media ".concat(e[2], " {")),
+                  r &&
+                    (t += "@layer".concat(
+                      e[5].length > 0 ? " ".concat(e[5]) : "",
+                      " {",
+                    )),
+                  (t += n(e)),
+                  r && (t += "}"),
+                  e[2] && (t += "}"),
+                  e[4] && (t += "}"),
+                  t
+                );
+              }).join("");
+            }),
+            (e.i = function (n, t, r, o, A) {
+              "string" == typeof n && (n = [[null, n, void 0]]);
+              var a = {};
+              if (r)
+                for (var i = 0; i < this.length; i++) {
+                  var s = this[i][0];
+                  null != s && (a[s] = !0);
+                }
+              for (var c = 0; c < n.length; c++) {
+                var d = [].concat(n[c]);
+                (r && a[d[0]]) ||
+                  (void 0 !== A &&
+                    (void 0 === d[5] ||
+                      (d[1] = "@layer"
+                        .concat(d[5].length > 0 ? " ".concat(d[5]) : "", " {")
+                        .concat(d[1], "}")),
+                    (d[5] = A)),
+                  t &&
+                    (d[2]
+                      ? ((d[1] = "@media "
+                          .concat(d[2], " {")
+                          .concat(d[1], "}")),
+                        (d[2] = t))
+                      : (d[2] = t)),
+                  o &&
+                    (d[4]
+                      ? ((d[1] = "@supports ("
+                          .concat(d[4], ") {")
+                          .concat(d[1], "}")),
+                        (d[4] = o))
+                      : (d[4] = "".concat(o))),
+                  e.push(d));
+              }
+            }),
+            e
+          );
+        };
+      },
+      354(n) {
+        "use strict";
+        n.exports = function (n) {
+          var e = n[1],
+            t = n[3];
+          if (!t) return e;
+          if ("function" == typeof btoa) {
+            var r = btoa(unescape(encodeURIComponent(JSON.stringify(t)))),
+              o =
+                "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(
+                  r,
+                ),
+              A = "/*# ".concat(o, " */");
+            return [e].concat([A]).join("\n");
+          }
+          return [e].join("\n");
+        };
+      },
+      353(n) {
+        n.exports = (function () {
+          "use strict";
+          var n = 6e4,
+            e = 36e5,
+            t = "millisecond",
+            r = "second",
+            o = "minute",
+            A = "hour",
+            a = "day",
+            i = "week",
+            s = "month",
+            c = "quarter",
+            d = "year",
+            l = "date",
+            p = "Invalid Date",
+            u =
+              /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/,
+            m =
+              /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,
+            E = {
+              name: "en",
+              weekdays:
+                "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split(
+                  "_",
+                ),
+              months:
+                "January_February_March_April_May_June_July_August_September_October_November_December".split(
+                  "_",
+                ),
+              ordinal: function (n) {
+                var e = ["th", "st", "nd", "rd"],
+                  t = n % 100;
+                return "[" + n + (e[(t - 20) % 10] || e[t] || e[0]) + "]";
+              },
+            },
+            b = function (n, e, t) {
+              var r = String(n);
+              return !r || r.length >= e
+                ? n
+                : "" + Array(e + 1 - r.length).join(t) + n;
+            },
+            C = {
+              s: b,
+              z: function (n) {
+                var e = -n.utcOffset(),
+                  t = Math.abs(e),
+                  r = Math.floor(t / 60),
+                  o = t % 60;
+                return (e <= 0 ? "+" : "-") + b(r, 2, "0") + ":" + b(o, 2, "0");
+              },
+              m: function n(e, t) {
+                if (e.date() < t.date()) return -n(t, e);
+                var r = 12 * (t.year() - e.year()) + (t.month() - e.month()),
+                  o = e.clone().add(r, s),
+                  A = t - o < 0,
+                  a = e.clone().add(r + (A ? -1 : 1), s);
+                return +(-(r + (t - o) / (A ? o - a : a - o)) || 0);
+              },
+              a: function (n) {
+                return n < 0 ? Math.ceil(n) || 0 : Math.floor(n);
+              },
+              p: function (n) {
+                return (
+                  {
+                    M: s,
+                    y: d,
+                    w: i,
+                    d: a,
+                    D: l,
+                    h: A,
+                    m: o,
+                    s: r,
+                    ms: t,
+                    Q: c,
+                  }[n] ||
+                  String(n || "")
+                    .toLowerCase()
+                    .replace(/s$/, "")
+                );
+              },
+              u: function (n) {
+                return void 0 === n;
+              },
+            },
+            g = "en",
+            f = {};
+          f[g] = E;
+          var B = "$isDayjsObject",
+            h = function (n) {
+              return n instanceof x || !(!n || !n[B]);
+            },
+            k = function n(e, t, r) {
+              var o;
+              if (!e) return g;
+              if ("string" == typeof e) {
+                var A = e.toLowerCase();
+                (f[A] && (o = A), t && ((f[A] = t), (o = A)));
+                var a = e.split("-");
+                if (!o && a.length > 1) return n(a[0]);
+              } else {
+                var i = e.name;
+                ((f[i] = e), (o = i));
+              }
+              return (!r && o && (g = o), o || (!r && g));
+            },
+            y = function (n, e) {
+              if (h(n)) return n.clone();
+              var t = "object" == typeof e ? e : {};
+              return ((t.date = n), (t.args = arguments), new x(t));
+            },
+            v = C;
+          ((v.l = k),
+            (v.i = h),
+            (v.w = function (n, e) {
+              return y(n, {
+                locale: e.$L,
+                utc: e.$u,
+                x: e.$x,
+                $offset: e.$offset,
+              });
+            }));
+          var x = (function () {
+              function E(n) {
+                ((this.$L = k(n.locale, null, !0)),
+                  this.parse(n),
+                  (this.$x = this.$x || n.x || {}),
+                  (this[B] = !0));
+              }
+              var b = E.prototype;
+              return (
+                (b.parse = function (n) {
+                  ((this.$d = (function (n) {
+                    var e = n.date,
+                      t = n.utc;
+                    if (null === e) return new Date(NaN);
+                    if (v.u(e)) return new Date();
+                    if (e instanceof Date) return new Date(e);
+                    if ("string" == typeof e && !/Z$/i.test(e)) {
+                      var r = e.match(u);
+                      if (r) {
+                        var o = r[2] - 1 || 0,
+                          A = (r[7] || "0").substring(0, 3);
+                        return t
+                          ? new Date(
+                              Date.UTC(
+                                r[1],
+                                o,
+                                r[3] || 1,
+                                r[4] || 0,
+                                r[5] || 0,
+                                r[6] || 0,
+                                A,
+                              ),
+                            )
+                          : new Date(
+                              r[1],
+                              o,
+                              r[3] || 1,
+                              r[4] || 0,
+                              r[5] || 0,
+                              r[6] || 0,
+                              A,
+                            );
+                      }
+                    }
+                    return new Date(e);
+                  })(n)),
+                    this.init());
+                }),
+                (b.init = function () {
+                  var n = this.$d;
+                  ((this.$y = n.getFullYear()),
+                    (this.$M = n.getMonth()),
+                    (this.$D = n.getDate()),
+                    (this.$W = n.getDay()),
+                    (this.$H = n.getHours()),
+                    (this.$m = n.getMinutes()),
+                    (this.$s = n.getSeconds()),
+                    (this.$ms = n.getMilliseconds()));
+                }),
+                (b.$utils = function () {
+                  return v;
+                }),
+                (b.isValid = function () {
+                  return !(this.$d.toString() === p);
+                }),
+                (b.isSame = function (n, e) {
+                  var t = y(n);
+                  return this.startOf(e) <= t && t <= this.endOf(e);
+                }),
+                (b.isAfter = function (n, e) {
+                  return y(n) < this.startOf(e);
+                }),
+                (b.isBefore = function (n, e) {
+                  return this.endOf(e) < y(n);
+                }),
+                (b.$g = function (n, e, t) {
+                  return v.u(n) ? this[e] : this.set(t, n);
+                }),
+                (b.unix = function () {
+                  return Math.floor(this.valueOf() / 1e3);
+                }),
+                (b.valueOf = function () {
+                  return this.$d.getTime();
+                }),
+                (b.startOf = function (n, e) {
+                  var t = this,
+                    c = !!v.u(e) || e,
+                    p = v.p(n),
+                    u = function (n, e) {
+                      var r = v.w(
+                        t.$u ? Date.UTC(t.$y, e, n) : new Date(t.$y, e, n),
+                        t,
+                      );
+                      return c ? r : r.endOf(a);
+                    },
+                    m = function (n, e) {
+                      return v.w(
+                        t
+                          .toDate()
+                          [
+                            n
+                          ].apply(t.toDate("s"), (c ? [0, 0, 0, 0] : [23, 59,
+                                  59, 999]).slice(e)),
+                        t,
+                      );
+                    },
+                    E = this.$W,
+                    b = this.$M,
+                    C = this.$D,
+                    g = "set" + (this.$u ? "UTC" : "");
+                  switch (p) {
+                    case d:
+                      return c ? u(1, 0) : u(31, 11);
+                    case s:
+                      return c ? u(1, b) : u(0, b + 1);
+                    case i:
+                      var f = this.$locale().weekStart || 0,
+                        B = (E < f ? E + 7 : E) - f;
+                      return u(c ? C - B : C + (6 - B), b);
+                    case a:
+                    case l:
+                      return m(g + "Hours", 0);
+                    case A:
+                      return m(g + "Minutes", 1);
+                    case o:
+                      return m(g + "Seconds", 2);
+                    case r:
+                      return m(g + "Milliseconds", 3);
+                    default:
+                      return this.clone();
+                  }
+                }),
+                (b.endOf = function (n) {
+                  return this.startOf(n, !1);
+                }),
+                (b.$set = function (n, e) {
+                  var i,
+                    c = v.p(n),
+                    p = "set" + (this.$u ? "UTC" : ""),
+                    u = ((i = {}),
+                    (i[a] = p + "Date"),
+                    (i[l] = p + "Date"),
+                    (i[s] = p + "Month"),
+                    (i[d] = p + "FullYear"),
+                    (i[A] = p + "Hours"),
+                    (i[o] = p + "Minutes"),
+                    (i[r] = p + "Seconds"),
+                    (i[t] = p + "Milliseconds"),
+                    i)[c],
+                    m = c === a ? this.$D + (e - this.$W) : e;
+                  if (c === s || c === d) {
+                    var E = this.clone().set(l, 1);
+                    (E.$d[u](m),
+                      E.init(),
+                      (this.$d = E.set(
+                        l,
+                        Math.min(this.$D, E.daysInMonth()),
+                      ).$d));
+                  } else u && this.$d[u](m);
+                  return (this.init(), this);
+                }),
+                (b.set = function (n, e) {
+                  return this.clone().$set(n, e);
+                }),
+                (b.get = function (n) {
+                  return this[v.p(n)]();
+                }),
+                (b.add = function (t, c) {
+                  var l,
+                    p = this;
+                  t = Number(t);
+                  var u = v.p(c),
+                    m = function (n) {
+                      var e = y(p);
+                      return v.w(e.date(e.date() + Math.round(n * t)), p);
+                    };
+                  if (u === s) return this.set(s, this.$M + t);
+                  if (u === d) return this.set(d, this.$y + t);
+                  if (u === a) return m(1);
+                  if (u === i) return m(7);
+                  var E =
+                      ((l = {}), (l[o] = n), (l[A] = e), (l[r] = 1e3), l)[u] ||
+                      1,
+                    b = this.$d.getTime() + t * E;
+                  return v.w(b, this);
+                }),
+                (b.subtract = function (n, e) {
+                  return this.add(-1 * n, e);
+                }),
+                (b.format = function (n) {
+                  var e = this,
+                    t = this.$locale();
+                  if (!this.isValid()) return t.invalidDate || p;
+                  var r = n || "YYYY-MM-DDTHH:mm:ssZ",
+                    o = v.z(this),
+                    A = this.$H,
+                    a = this.$m,
+                    i = this.$M,
+                    s = t.weekdays,
+                    c = t.months,
+                    d = t.meridiem,
+                    l = function (n, t, o, A) {
+                      return (n && (n[t] || n(e, r))) || o[t].slice(0, A);
+                    },
+                    u = function (n) {
+                      return v.s(A % 12 || 12, n, "0");
+                    },
+                    E =
+                      d ||
+                      function (n, e, t) {
+                        var r = n < 12 ? "AM" : "PM";
+                        return t ? r.toLowerCase() : r;
+                      };
+                  return r.replace(m, function (n, r) {
+                    return (
+                      r ||
+                      (function (n) {
+                        switch (n) {
+                          case "YY":
+                            return String(e.$y).slice(-2);
+                          case "YYYY":
+                            return v.s(e.$y, 4, "0");
+                          case "M":
+                            return i + 1;
+                          case "MM":
+                            return v.s(i + 1, 2, "0");
+                          case "MMM":
+                            return l(t.monthsShort, i, c, 3);
+                          case "MMMM":
+                            return l(c, i);
+                          case "D":
+                            return e.$D;
+                          case "DD":
+                            return v.s(e.$D, 2, "0");
+                          case "d":
+                            return String(e.$W);
+                          case "dd":
+                            return l(t.weekdaysMin, e.$W, s, 2);
+                          case "ddd":
+                            return l(t.weekdaysShort, e.$W, s, 3);
+                          case "dddd":
+                            return s[e.$W];
+                          case "H":
+                            return String(A);
+                          case "HH":
+                            return v.s(A, 2, "0");
+                          case "h":
+                            return u(1);
+                          case "hh":
+                            return u(2);
+                          case "a":
+                            return E(A, a, !0);
+                          case "A":
+                            return E(A, a, !1);
+                          case "m":
+                            return String(a);
+                          case "mm":
+                            return v.s(a, 2, "0");
+                          case "s":
+                            return String(e.$s);
+                          case "ss":
+                            return v.s(e.$s, 2, "0");
+                          case "SSS":
+                            return v.s(e.$ms, 3, "0");
+                          case "Z":
+                            return o;
+                        }
+                        return null;
+                      })(n) ||
+                      o.replace(":", "")
+                    );
+                  });
+                }),
+                (b.utcOffset = function () {
+                  return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
+                }),
+                (b.diff = function (t, l, p) {
+                  var u,
+                    m = this,
+                    E = v.p(l),
+                    b = y(t),
+                    C = (b.utcOffset() - this.utcOffset()) * n,
+                    g = this - b,
+                    f = function () {
+                      return v.m(m, b);
+                    };
+                  switch (E) {
+                    case d:
+                      u = f() / 12;
+                      break;
+                    case s:
+                      u = f();
+                      break;
+                    case c:
+                      u = f() / 3;
+                      break;
+                    case i:
+                      u = (g - C) / 6048e5;
+                      break;
+                    case a:
+                      u = (g - C) / 864e5;
+                      break;
+                    case A:
+                      u = g / e;
+                      break;
+                    case o:
+                      u = g / n;
+                      break;
+                    case r:
+                      u = g / 1e3;
+                      break;
+                    default:
+                      u = g;
+                  }
+                  return p ? u : v.a(u);
+                }),
+                (b.daysInMonth = function () {
+                  return this.endOf(s).$D;
+                }),
+                (b.$locale = function () {
+                  return f[this.$L];
+                }),
+                (b.locale = function (n, e) {
+                  if (!n) return this.$L;
+                  var t = this.clone(),
+                    r = k(n, e, !0);
+                  return (r && (t.$L = r), t);
+                }),
+                (b.clone = function () {
+                  return v.w(this.$d, this);
+                }),
+                (b.toDate = function () {
+                  return new Date(this.valueOf());
+                }),
+                (b.toJSON = function () {
+                  return this.isValid() ? this.toISOString() : null;
+                }),
+                (b.toISOString = function () {
+                  return this.$d.toISOString();
+                }),
+                (b.toString = function () {
+                  return this.$d.toUTCString();
+                }),
+                E
+              );
+            })(),
+            w = x.prototype;
+          return (
+            (y.prototype = w),
+            [
+              ["$ms", t],
+              ["$s", r],
+              ["$m", o],
+              ["$H", A],
+              ["$W", a],
+              ["$M", s],
+              ["$y", d],
+              ["$D", l],
+            ].forEach(function (n) {
+              w[n[1]] = function (e) {
+                return this.$g(e, n[0], n[1]);
+              };
+            }),
+            (y.extend = function (n, e) {
+              return (n.$i || (n(e, x, y), (n.$i = !0)), y);
+            }),
+            (y.locale = k),
+            (y.isDayjs = h),
+            (y.unix = function (n) {
+              return y(1e3 * n);
+            }),
+            (y.en = f[g]),
+            (y.Ls = f),
+            (y.p = {}),
+            y
+          );
+        })();
+      },
+      72(n) {
+        "use strict";
+        var e = [];
+        function t(n) {
+          for (var t = -1, r = 0; r < e.length; r++)
+            if (e[r].identifier === n) {
+              t = r;
+              break;
+            }
+          return t;
+        }
+        function r(n, r) {
+          for (var A = {}, a = [], i = 0; i < n.length; i++) {
+            var s = n[i],
+              c = r.base ? s[0] + r.base : s[0],
+              d = A[c] || 0,
+              l = "".concat(c, " ").concat(d);
+            A[c] = d + 1;
+            var p = t(l),
+              u = {
+                css: s[1],
+                media: s[2],
+                sourceMap: s[3],
+                supports: s[4],
+                layer: s[5],
+              };
+            if (-1 !== p) (e[p].references++, e[p].updater(u));
+            else {
+              var m = o(u, r);
+              ((r.byIndex = i),
+                e.splice(i, 0, { identifier: l, updater: m, references: 1 }));
+            }
+            a.push(l);
+          }
+          return a;
+        }
+        function o(n, e) {
+          var t = e.domAPI(e);
+          return (
+            t.update(n),
+            function (e) {
+              if (e) {
+                if (
+                  e.css === n.css &&
+                  e.media === n.media &&
+                  e.sourceMap === n.sourceMap &&
+                  e.supports === n.supports &&
+                  e.layer === n.layer
+                )
+                  return;
+                t.update((n = e));
+              } else t.remove();
+            }
+          );
+        }
+        n.exports = function (n, o) {
+          var A = r((n = n || []), (o = o || {}));
+          return function (n) {
+            n = n || [];
+            for (var a = 0; a < A.length; a++) {
+              var i = t(A[a]);
+              e[i].references--;
+            }
+            for (var s = r(n, o), c = 0; c < A.length; c++) {
+              var d = t(A[c]);
+              0 === e[d].references && (e[d].updater(), e.splice(d, 1));
+            }
+            A = s;
+          };
+        };
+      },
+      659(n) {
+        "use strict";
+        var e = {};
+        n.exports = function (n, t) {
+          var r = (function (n) {
+            if (void 0 === e[n]) {
+              var t = document.querySelector(n);
+              if (
+                window.HTMLIFrameElement &&
+                t instanceof window.HTMLIFrameElement
+              )
+                try {
+                  t = t.contentDocument.head;
+                } catch (n) {
+                  t = null;
+                }
+              e[n] = t;
+            }
+            return e[n];
+          })(n);
+          if (!r)
+            throw new Error(
+              "Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.",
+            );
+          r.appendChild(t);
+        };
+      },
+      540(n) {
+        "use strict";
+        n.exports = function (n) {
+          var e = document.createElement("style");
+          return (n.setAttributes(e, n.attributes), n.insert(e, n.options), e);
+        };
+      },
+      56(n, e, t) {
+        "use strict";
+        n.exports = function (n) {
+          var e = t.nc;
+          e && n.setAttribute("nonce", e);
+        };
+      },
+      825(n) {
+        "use strict";
+        n.exports = function (n) {
+          if ("undefined" == typeof document)
+            return { update: function () {}, remove: function () {} };
+          var e = n.insertStyleElement(n);
+          return {
+            update: function (t) {
+              !(function (n, e, t) {
+                var r = "";
+                (t.supports && (r += "@supports (".concat(t.supports, ") {")),
+                  t.media && (r += "@media ".concat(t.media, " {")));
+                var o = void 0 !== t.layer;
+                (o &&
+                  (r += "@layer".concat(
+                    t.layer.length > 0 ? " ".concat(t.layer) : "",
+                    " {",
+                  )),
+                  (r += t.css),
+                  o && (r += "}"),
+                  t.media && (r += "}"),
+                  t.supports && (r += "}"));
+                var A = t.sourceMap;
+                (A &&
+                  "undefined" != typeof btoa &&
+                  (r +=
+                    "\n/*# sourceMappingURL=data:application/json;base64,".concat(
+                      btoa(unescape(encodeURIComponent(JSON.stringify(A)))),
+                      " */",
+                    )),
+                  e.styleTagTransform(r, n, e.options));
+              })(e, n, t);
+            },
+            remove: function () {
+              !(function (n) {
+                if (null === n.parentNode) return !1;
+                n.parentNode.removeChild(n);
+              })(e);
+            },
+          };
+        };
+      },
+      113(n) {
+        "use strict";
+        n.exports = function (n, e) {
+          if (e.styleSheet) e.styleSheet.cssText = n;
+          else {
+            for (; e.firstChild; ) e.removeChild(e.firstChild);
+            e.appendChild(document.createTextNode(n));
+          }
+        };
+      },
+    },
+    e = {};
+  function t(r) {
+    var o = e[r];
+    if (void 0 !== o) return o.exports;
+    var A = (e[r] = { id: r, exports: {} });
+    return (n[r].call(A.exports, A, A.exports, t), A.exports);
+  }
+  ((t.n = (n) => {
+    var e = n && n.__esModule ? () => n.default : () => n;
+    return (t.d(e, { a: e }), e);
+  }),
+    (t.d = (n, e) => {
+      for (var r in e)
+        t.o(e, r) &&
+          !t.o(n, r) &&
+          Object.defineProperty(n, r, { enumerable: !0, get: e[r] });
+    }),
+    (t.g = (function () {
+      if ("object" == typeof globalThis) return globalThis;
+      try {
+        return this || new Function("return this")();
+      } catch (n) {
+        if ("object" == typeof window) return window;
+      }
+    })()),
+    (t.o = (n, e) => Object.prototype.hasOwnProperty.call(n, e)),
+    (() => {
+      var n;
+      t.g.importScripts && (n = t.g.location + "");
+      var e = t.g.document;
+      if (
+        !n &&
+        e &&
+        (e.currentScript &&
+          "SCRIPT" === e.currentScript.tagName.toUpperCase() &&
+          (n = e.currentScript.src),
+        !n)
+      ) {
+        var r = e.getElementsByTagName("script");
+        if (r.length)
+          for (var o = r.length - 1; o > -1 && (!n || !/^http(s?):/.test(n)); )
+            n = r[o--].src;
+      }
+      if (!n)
+        throw new Error(
+          "Automatic publicPath is not supported in this browser",
+        );
+      ((n = n
+        .replace(/^blob:/, "")
+        .replace(/#.*$/, "")
+        .replace(/\?.*$/, "")
+        .replace(/\/[^\/]+$/, "/")),
+        (t.p = n));
+    })(),
+    (t.nc = void 0),
+    (() => {
+      "use strict";
+      var n = t(72),
+        e = t.n(n),
+        r = t(825),
+        o = t.n(r),
+        A = t(659),
+        a = t.n(A),
+        i = t(56),
+        s = t.n(i),
+        c = t(540),
+        d = t.n(c),
+        l = t(113),
+        p = t.n(l),
+        u = t(911),
+        m = {};
+      ((m.styleTagTransform = p()),
+        (m.setAttributes = s()),
+        (m.insert = a().bind(null, "head")),
+        (m.domAPI = o()),
+        (m.insertStyleElement = d()),
+        e()(u.A, m),
+        u.A && u.A.locals && u.A.locals);
+      var E = t(95),
+        b = {};
+      ((b.styleTagTransform = p()),
+        (b.setAttributes = s()),
+        (b.insert = a().bind(null, "head")),
+        (b.domAPI = o()),
+        (b.insertStyleElement = d()),
+        e()(E.A, b),
+        E.A && E.A.locals && E.A.locals);
+      const C = t.p + "7b49b4145dae406200b3.svg",
+        g = t.p + "969944ad3e95cf794413.svg",
+        f = t.p + "b648134b1e7b6d05e694.svg",
+        B = t.p + "9506e30e9e7c1259ad47.svg",
+        h = t.p + "8873c541d750cb8dc155.svg",
+        k = t.p + "83da2bafcacd239ef5f5.svg",
+        y = document.getElementById("menu-toggle"),
+        v = document.getElementById("left-sidebar"),
+        x = document.getElementById("overlay"),
+        w = document.getElementById("close-menu");
+      function S() {
+        (v.classList.remove("open"), w.classList.remove("close-menu-active"));
+      }
+      var $ = t(353);
+      const j = document.getElementById("tasks-container"),
+        M = document.querySelectorAll(".js-new-task-button"),
+        Y = document.getElementById("new-task-modal"),
+        D = Y.querySelector(".js-close"),
+        L = document.querySelector(".close-right-sidebar"),
+        W = document.querySelector(".js-right-sidebar"),
+        I = W.querySelector(".task-essentials");
+      class z {
+        constructor(n) {
+          ((this.title = n.title),
+            (this.description = n.description),
+            (this.dueDate = n.dueDate),
+            (this.priority = n.priority),
+            (this.notes = n.notes),
+            (this.project = n.project),
+            (this.completed = !1));
+        }
+      }
+      const q = JSON.parse(localStorage.getItem("todos")) || [
+        {
+          title: "Buy groceries",
+          description: "Get weekly groceries from the supermarket",
+          dueDate: "2026-03-30",
+          priority: "low",
+          notes: "Don't forget the milk and eggs",
+          project: "Personal",
+          completed: !1,
+        },
+        {
+          title: "Finish project report",
+          description: "Complete the quarterly report for the team",
+          dueDate: "2026-04-01",
+          priority: "high",
+          notes: "Include charts from last month's data",
+          project: "Work",
+          completed: !1,
+        },
+        {
+          title: "Doctor appointment",
+          description: "Annual checkup at the clinic",
+          dueDate: "2026-04-05",
+          priority: "medium",
+          notes: "Bring insurance card",
+          project: "Health",
+          completed: !1,
+        },
+        {
+          title: "Fix login bug",
+          description: "Users are unable to reset their password",
+          dueDate: "2026-03-29",
+          priority: "high",
+          notes: "Reported by 3 users, check auth middleware",
+          project: "Work",
+          completed: !1,
+        },
+        {
+          title: "Read JavaScript book",
+          description: "Continue reading You Don't Know JS",
+          dueDate: "2026-04-10",
+          priority: "low",
+          notes: "Currently on chapter 4",
+          project: "Learning",
+          completed: !1,
+        },
+      ];
+      function T() {
+        localStorage.setItem("todos", JSON.stringify(q));
+      }
+      (q.map((n) => new z(n)),
+        y.addEventListener("click", () => {
+          (v.classList.toggle("open"), w.classList.toggle("close-menu-active"));
+        }),
+        w.addEventListener("click", () => {
+          S();
+        }),
+        document.addEventListener("click", (n) => {
+          v.contains(n.target) || y.contains(n.target) || S();
+        }),
+        U(),
+        Q(),
+        _(),
+        R(j.querySelector(".js-task")),
+        F(),
+        P(),
+        V());
+      let O = "all";
+      function U(n = q) {
+        j.innerHTML = n
+          .map((n, e) => {
+            const t = $(n.dueDate).format("DD MMMM YYYY");
+            return ` <div class="task js-task" data-index="${q.indexOf(n)}">\n      <div class="start">\n        <input type="checkbox" class="js-completed" ${n.completed ? "checked" : ""}  />\n        <p class="title">${n.title}</p>\n      </div>\n      <p class="description">${n.description}</p>\n      <p class="due-date">${t}</p>\n      <div class="end">\n        <p class="priority js-priority">${n.priority}</p>\n        <p class="project">\n          <span class="project-svg"></span>\n          ${n.project}\n        </p>\n      </div>\n    </div>\n  `;
+          })
+          .join("");
+      }
+      function H(n) {
+        const e = $().format("YYYY-MM-DD");
+        return "today" === n
+          ? q.filter((n) => n.dueDate === e)
+          : "upcoming" === n
+            ? q.filter((n) => $(n.dueDate).isAfter(e))
+            : "Personal" === n
+              ? q.filter((n) => "Personal" === n.project)
+              : "Work" === n
+                ? q.filter((n) => "Work" === n.project)
+                : "Learning" === n
+                  ? q.filter((n) => "Learning" === n.project)
+                  : "Health" === n
+                    ? q.filter((n) => "Health" === n.project)
+                    : "Completed" === n
+                      ? q.filter((n) => !0 === n.completed)
+                      : q;
+      }
+      function X(n) {
+        ((O = n), U(H(n)), Q(), _(), V());
+        const e = j.querySelector(".js-task");
+        e
+          ? (R(e), F(), P())
+          : (I.innerHTML = "<p>No tasks for this filter.</p>");
+      }
+      function N(n) {
+        (document
+          .querySelectorAll(".left-sidebar button")
+          .forEach((n) => n.classList.remove("filter-active")),
+          n.classList.add("filter-active"));
+      }
+      (j.addEventListener("change", (n) => {
+        if (n.target.classList.contains("js-completed")) {
+          const e = Number(
+            n.target.closest(".js-task").getAttribute("data-index"),
+          );
+          ((q[e].completed = n.target.checked),
+            T(),
+            R(n.target.closest(".js-task")),
+            F(),
+            P());
+        }
+      }),
+        document.querySelectorAll("[data-filter]").forEach((n) => {
+          n.addEventListener("click", () => {
+            (N(n),
+              X(n.getAttribute("data-filter")),
+              (document.querySelector(".filter-title").textContent =
+                `${n.getAttribute("data-filter")}`));
+          });
+        }),
+        document.querySelectorAll(".project-filter").forEach((n) => {
+          n.addEventListener("click", () => {
+            (N(n),
+              X(n.textContent.trim()),
+              (document.querySelector(".filter-title").textContent =
+                `${n.textContent.trim()}`));
+          });
+        }));
+      const Z = document.getElementById("search");
+      function Q() {
+        j.querySelectorAll(".js-task").forEach((n) => {
+          const e = n.querySelector(".js-priority");
+          "low" === e.textContent
+            ? e.classList.add("low-priority")
+            : "medium" === e.textContent
+              ? e.classList.add("medium-priority")
+              : "high" === e.textContent && e.classList.add("high-priority");
+        });
+      }
+      function P() {
+        const n = I.querySelector(".js-prior");
+        "low" === n.textContent
+          ? n.classList.add("low-priority")
+          : "medium" === n.textContent
+            ? n.classList.add("medium-priority")
+            : "high" === n.textContent && n.classList.add("high-priority");
+      }
+      function _() {
+        j.querySelectorAll(".js-task").forEach((n) => {
+          const e = n.querySelector(".project"),
+            t = n.querySelector(".project-svg");
+          "Personal" === e.textContent.trim()
+            ? (t.innerHTML = `<img src="${g}" />`)
+            : "Work" === e.textContent.trim()
+              ? (t.innerHTML = `<img src="${f}" />`)
+              : "Health" === e.textContent.trim()
+                ? (t.innerHTML = `<img src="${B}" />`)
+                : "Learning" === e.textContent.trim() &&
+                  (t.innerHTML = `<img src="${h}" />`);
+        });
+      }
+      function R(n) {
+        const e = Number(n.getAttribute("data-index"));
+        (q.forEach((n, t) => {
+          if (t === e) {
+            const t = $(n.dueDate).format("DD MMMM YYYY");
+            I.innerHTML = `\n        <div class="task-title">\n          \n          <button class="edit-task" data-task-index="${e}">\n          <h3>${n.title}</h3>\n            <img src="${C}" />\n          </button> \n          ${n.completed ? `\n          <p class="completed completed-visible">\n            <img src="${k}"/>\n            Completed\n          </p>` : `\n          <p class="completed">\n            <img src="${k}"/>\n            Completed\n          </p>`}         \n        </div>\n        <p class="description">${n.description}</p>\n        <div class="subtasks">\n          <h3>Subtasks</h3>\n          <p class="subtask">None</p>\n        </div>\n        <div class="due-date">\n          <p>Due date</p>\n          <p>${t}</p>\n        </div>\n        <div class="priority js-priority">\n          <p>Priority</p>\n          <p class="js-prior">${n.priority}</p>\n        </div>\n        <div class="project-container">\n          <p class="project">Project</p>\n          <p class="project-name">\n            <span class="project-svg"></span>\n            ${n.project}\n          </p>\n        </div>\n        <h4>notes</h4>\n        <div class="notes">\n          ${n.notes ? `${n.notes}` : "No notes for this task"}\n        </div>\n        <button class="delete-task" data-task-index="${e}">Delete Task</button>\n      `;
+          }
+        }),
+          (function () {
+            const n = I.querySelector(".edit-task");
+            n &&
+              n.addEventListener("click", () => {
+                !(function (n) {
+                  ((G = "edit"), (J = n));
+                  const e = q[n];
+                  ((document.getElementById("title").value = e.title),
+                    (document.getElementById("description").value =
+                      e.description),
+                    (document.getElementById("project").value = e.project),
+                    (document.getElementById("notes").value = e.notes),
+                    (document.getElementById("date").value = e.dueDate),
+                    (document.querySelector(
+                      `input[name="priority"][value="${e.priority}"]`,
+                    ).checked = !0),
+                    x.classList.add("overlay-active"),
+                    Y.classList.add("new-task-modal-active"));
+                })(Number(n.getAttribute("data-task-index")));
+              });
+          })(),
+          tn());
+      }
+      function F() {
+        const n = I.querySelector(".project-name").textContent.trim(),
+          e = I.querySelector(".project-svg");
+        "Personal" === n
+          ? (e.innerHTML = `<img src="${g}" />`)
+          : "Work" === n
+            ? (e.innerHTML = `<img src="${f}" />`)
+            : "Health" === n
+              ? (e.innerHTML = `<img src="${B}" />`)
+              : "Learning" === n && (e.innerHTML = `<img src="${h}" />`);
+      }
+      function V() {
+        (j.querySelectorAll(".js-task").forEach((n) => {
+          n.addEventListener("click", (e) => {
+            var t;
+            ((t = n),
+              j.querySelectorAll(".js-task").forEach((n) => {
+                n.classList.remove("task-active");
+              }),
+              t.classList.add("task-active"),
+              R(n),
+              W.classList.add("right-sidebar-visible"));
+            const r = I.querySelector(".js-prior");
+            ("low" === r.textContent
+              ? r.classList.add("low-priority")
+              : "medium" === r.textContent
+                ? r.classList.add("medium-priority")
+                : "high" === r.textContent && r.classList.add("high-priority"),
+              F(),
+              L.classList.add("close-right-sidebar-active"));
+          });
+        }),
+          L.addEventListener("click", () => {
+            (W.classList.remove("right-sidebar-visible"),
+              L.classList.remove("close-right-sidebar-active"));
+          }));
+      }
+      (Z.addEventListener("input", () => {
+        const n = Z.value.trim().toLowerCase();
+        if (!n) return void X(O);
+        (U(H(O).filter((e) => e.title.toLowerCase().includes(n))),
+          Q(),
+          _(),
+          V());
+        const e = j.querySelector(".js-task");
+        e ? (R(e), F(), P()) : (I.innerHTML = "<p>No matching tasks.</p>");
+      }),
+        M.forEach((n) => {
+          n.addEventListener("click", () => {
+            ((G = "add"),
+              (J = null),
+              Y.reset(),
+              x.classList.add("overlay-active"),
+              Y.classList.add("new-task-modal-active"));
+          });
+        }),
+        D.addEventListener("click", () => {
+          en();
+        }));
+      let G = "add",
+        J = null;
+      function K() {
+        const n = document.getElementById("title").value,
+          e = document.getElementById("description").value,
+          t = document.getElementById("date").value,
+          r = document.querySelector('input[name="priority"]:checked')?.value;
+        return {
+          title: n,
+          description: e,
+          dueDate: t,
+          priority: r,
+          notes: document.getElementById("notes").value,
+          project: document.getElementById("project").value,
+        };
+      }
+      function nn({ title: n, description: e, dueDate: t }) {
+        return !!(n && e && t) || (alert("Nope"), !1);
+      }
+      function en() {
+        (x.classList.remove("overlay-active"),
+          Y.classList.remove("new-task-modal-active"));
+      }
+      function tn() {
+        const n = I.querySelector(".delete-task");
+        n &&
+          n.addEventListener("click", () => {
+            const e = Number(n.getAttribute("data-task-index"));
+            (q.splice(e, 1), U(), Q(), _(), V());
+            const t = e < q.length ? e : q.length - 1,
+              r = j.querySelector(`[data-index="${t}"]`);
+            r ? (R(r), F(), P(), tn()) : (I.innerHTML = "<p>No tasks yet.</p>");
+          });
+      }
+      Y.addEventListener("submit", (n) => {
+        (n.preventDefault(),
+          "add" === G
+            ? (function () {
+                const n = K();
+                nn(n) && (q.push(new z(n)), T(), U(), Q(), V(), en());
+              })()
+            : "edit" === G &&
+              (function (n) {
+                const e = K();
+                nn(e) &&
+                  ((q[n] = new z(e)),
+                  T(),
+                  U(),
+                  Q(),
+                  _(),
+                  V(),
+                  R(j.querySelector(`[data-index="${n}"]`)),
+                  F(),
+                  P(),
+                  en());
+              })(J));
+      });
+    })());
+})();
 //# sourceMappingURL=bundle.js.map

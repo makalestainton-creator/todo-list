@@ -101,7 +101,7 @@ let activeFilter = "all";
 
 function renderTasks(tasklist = todos) {
   tasksContainer.innerHTML = tasklist
-    .map((todo, index) => {
+    .map((todo) => {
       const formattedDueDate = dayjs(todo.dueDate).format("DD MMMM YYYY");
       const realIndex = todos.indexOf(todo);
       return ` <div class="task js-task" data-index="${realIndex}">
@@ -122,17 +122,6 @@ function renderTasks(tasklist = todos) {
   `;
     })
     .join("");
-}
-
-function markAsCompleted(index) {
-  const todo = todos[index];
-
-  todo.completed = true;
-
-  document.querySelector(".completed").classList.add("completed-visible");
-
-  applyEssentialsSVG();
-  applySummaryStyles();
 }
 
 tasksContainer.addEventListener("change", (e) => {
@@ -350,9 +339,7 @@ function renderTaskSummary(taskElement) {
         </div>
         <h4>notes</h4>
         <div class="notes">
-          ${
-            todo.notes ? `${todo.notes}` : "No notes for this task"
-          }
+          ${todo.notes ? `${todo.notes}` : "No notes for this task"}
         </div>
         <button class="delete-task" data-task-index="${taskIndex}">Delete Task</button>
       `;
@@ -392,7 +379,7 @@ function toggleTaskSummary() {
   const tasks = tasksContainer.querySelectorAll(".js-task");
 
   tasks.forEach((task) => {
-    task.addEventListener("click", (e) => {
+    task.addEventListener("click", () => {
       activateTaskContainer(task);
       renderTaskSummary(task);
       taskSummary.classList.add("right-sidebar-visible");
@@ -564,8 +551,3 @@ function attachEditListeber() {
     openEditDialogue(index);
   });
 }
-
-const personalProjects = [];
-const workProjects = [];
-const healthProjects = [];
-const learningProjects = [];

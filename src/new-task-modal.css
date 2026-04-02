@@ -77,14 +77,14 @@
   padding: 8px;
 }
 
-select, 
+select,
 ::picker(select) {
   appearance: base-select;
 }
 
 select {
   width: 100%;
-  padding: .3rem .5rem;
+  padding: 0.3rem 0.5rem;
   border: 1px solid #a0aec0;
   border-radius: 4px;
   background-color: #dfe5eb;
@@ -112,9 +112,9 @@ select::picker-icon {
 
 .picker-icon {
   position: absolute;
-  right: .2rem;
+  right: 0.2rem;
   bottom: 20px;
-  transition: transform .4s ease;
+  transition: transform 0.4s ease;
 }
 
 select:open ~ .picker-icon {
@@ -124,12 +124,12 @@ select:open ~ .picker-icon {
 ::picker(select) {
   border: 1px solid #a0aec0;
   border: none;
-  border-radius: .4rem;
+  border-radius: 0.4rem;
   opacity: 0;
   padding: 1rem 0;
   background-color: #d0d8e4;
   top: calc(anchor(bottom) + 1px);
-  transition: all .3s allow-discrete;
+  transition: all 0.3s allow-discrete;
 }
 
 ::picker(select):popover-open {
@@ -142,11 +142,10 @@ select:open ~ .picker-icon {
   }
 }
 
-
 option {
   display: flex;
   cursor: pointer;
-  padding: .4rem 1rem;
+  padding: 0.4rem 1rem;
 }
 
 option:hover {
@@ -160,12 +159,12 @@ option:checked {
 }
 
 option:not(option:last-of-type) {
-  margin-bottom: .4rem;
+  margin-bottom: 0.4rem;
 }
 
 option::checkmark {
   content: "✅";
-  font-size: .9rem;
+  font-size: 0.9rem;
   order: 1;
   margin-left: auto;
 }
