@@ -6,32 +6,36 @@
     <title>Todo List</title>
   </head>
   <body>
+    <div class="touch-only-card">
+      <p>Tap each task to view its full details</p>
+    </div>
+
     <div class="overlay" id="overlay"></div>
-    
+
     <aside class="left-sidebar" id="left-sidebar">
       <button class="close-menu" id="close-menu">
         <img src="icons/close-menu.svg" alt="" />
       </button>
       <div class="top">
         <div class="logo">
-          <img src="icons/logo.svg" alt="" />
+          <img src="icons/logo.svg"/>
           Taskey
         </div>
-        <button>
+        <button data-filter="all" class="filter-active">
           Inbox
-          <img src="icons/inbox.svg" alt="" />
+          <img src="icons/inbox.svg"/>
         </button>
-        <button>
+        <button data-filter="today">
           Today
-          <img src="icons/today.svg" alt="" />
+          <img src="icons/today.svg"/>
         </button>
-        <button>
+        <button data-filter="upcoming">
           Upcoming
-          <img src="icons/upcoming.svg" alt="" />
+          <img src="icons/upcoming.svg"/>
         </button>
-        <button>
+        <button class="project-filter">
           Completed
-          <img src="icons/completed.svg" alt="" />
+          <img src="icons/completed.svg" />
         </button>
       </div>
       <details>
@@ -42,102 +46,175 @@
         <nav>
           <ul>
             <li>
-              <button>
+              <button class="project-filter">
                 Personal
                 <img src="icons/personal-projects.svg" alt="" />
               </button>
             </li>
             <li>
-              <button>
+              <button class="project-filter">
                 Work
                 <img src="icons/work-projects.svg" alt="" />
+              </button>
+            </li>
+            <li>
+              <button class="project-filter">
+                Health
+                <img src="icons/health.svg" alt="" />
+              </button>
+            </li>
+            <li>
+              <button class="project-filter">
+                Learning
+                <img src="icons/learning.svg" alt="" />
               </button>
             </li>
           </ul>
         </nav>
       </details>
-      <button class="new-task-button"><span>+</span> New Task</button>
+      <button class="new-task-button js-new-task-button">+ New Task</button>
     </aside>
-    <div class="container">
-      <header>
-        <div class="left-section">
-          <div class="logo">
-            <img src="icons/logo.svg" />
-            Taskey
-          </div>
-          <button id="menu-toggle" class="menu-toggle">
-            <img src="icons/sidebar.svg" />
-          </button>
+
+    <header>
+      <div class="left-section">
+        <div class="logo">
+          <img src="icons/logo.svg" />
+          Taskey
         </div>
+        <button id="menu-toggle" class="menu-toggle">
+          <img src="icons/sidebar.svg" />
+        </button>
         <div class="search">
           <label for="search">
             <img src="icons/search.svg" class="search-icon" />
           </label>
-          <input type="text" name="search" id="search" placeholder="Search" />
+          <input type="text" name="search" id="search" placeholder="Search by description" />
         </div>
+      </div>
+
+      <div class="right-section">
         <button class="theme-toggle">
           <img src="icons/light-mode.svg" />
         </button>
-      </header>
+        <button class="new-task-button js-new-task-button">+ New Task</button>
+      </div>
+    </header>
 
+    <form class="new-task-modal" id="new-task-modal">
+      <h4>Let's gather some details of your task</h4>
+      <div class="required">
+        <div class="form-row">
+          <label for="title">Title:</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="e.g., buy groceries"
+            required
+          />
+        </div>
+        <div class="form-row">
+          <label for="description">Description:</label>
+          <input type="text" name="description" id="description" required />
+        </div>
+
+        <div class="form-row">
+          <label for="project">Project:</label>
+          <select name="project" id="project">
+            <button>
+              <selectedcontent></selectedcontent>
+            </button>
+            <option value="Personal">Personal</option>
+            <option value="Work">Work</option>
+            <option value="Health">Health</option>
+            <option value="Learning">Learning</option>
+          </select>
+          <img src="icons/picker-icon.svg" class="picker-icon" />
+        </div>
+        <div class="form-row">
+          <label for="date">Due date:</label>
+          <input type="date" name="date" id="date" />
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Level of urgency</legend>
+        <div class="form-row">
+          <input type="radio" name="priority" id="low-priority" value="low" />
+          <label for="low-priority">Low</label>
+        </div>
+        <div class="form-row">
+          <input
+            type="radio"
+            name="priority"
+            id="medium-priority"
+            value="medium"
+            checked
+          />
+          <label for="medium-priority">Medium</label>
+        </div>
+        <div class="form-row">
+          <input type="radio" name="priority" id="high-priority" value="high" />
+          <label for="high-priority">High</label>
+        </div>
+      </fieldset>
+
+      <textarea
+        name="notes"
+        id="notes"
+        rows="5"
+        placeholder="Some notes about the task"
+      ></textarea>
+
+      <div class="buttons">
+        <button type="submit" class="save-task">Save Task</button>
+        <button type="button" class="js-close">Close</button>
+      </div>
+    </form>
+
+    <div class="container">
       <main>
-        <div class="tasks-container">
-          <div class="task">
-            <div class="start">
-              <input type="checkbox" name="" id="" />
-              <p class="title">Buy groceries</p>
-            </div>
-            <p class="description">Get weekly groceries from the supermarket</p>
-            <p class="due-date">2026-03-30</p>
-            <div class="end">
-              <p class="priority">Low</p>
-              <!-- <p class="notes">Don't forget the milk and eggs</p> -->
-              <p class="project">Personal</p>
-            </div>
-          </div>
-          <div class="task">
-            <div class="start">
-              <input type="checkbox" name="" id="" />
-              <p class="title">Buy groceries</p>
-            </div>
-            <p class="description">Get weekly groceries from the supermarket</p>
-            <p class="due-date">2026-03-30</p>
-            <div class="end">
-              <p class="priority">Medium</p>
-              <!-- <p class="notes">Don't forget the milk and eggs</p> -->
-              <p class="project">Personal</p>
-            </div>
-          </div>
-          <div class="task">
-            <div class="start">
-              <input type="checkbox" name="" id="" />
-              <p class="title">Buy groceries</p>
-            </div>
-            <p class="description">Get weekly groceries from the supermarket</p>
-            <p class="due-date">2026-03-30</p>
-            <div class="end">
-              <p class="priority">High</p>
-              <!-- <p class="notes">Don't forget the milk and eggs</p> -->
-              <p class="project">Personal</p>
-            </div>
-          </div>
-        </div>
+        <h2 class="filter-title">Inbox</h2>
+        <div class="tasks-container" id="tasks-container"></div>
       </main>
-      <aside class="right-sidebar">
-        <div class="task-title">
-          <h3>Buy groceries</h3>
-          <img src="icons/edit.svg" />
-        </div>
-        <p class="description">Get weekly groceries from the supermarket</p>
-        <h3>Subtasks</h3>
-        <p class="subtask">None</p>
-        <div class="due-date">
-          <p>Due date</p>
-          <p>2026-03-30</p>
-        </div>
-        <div class="priority">
-          <p>Priority</p>
-          <p>Low</p>
+
+      <aside class="right-sidebar js-right-sidebar">
+        <button class="close-right-sidebar">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            height="28"
+            width="28"
+          >
+            <style>
+              .bg {
+                fill: transparent;
+                stroke: #152333;
+                stroke-width: 2;
+                transition: fill 0.2s ease;
+              }
+              .line {
+                fill: #152333;
+                transition: fill 0.2s ease;
+              }
+              svg:hover .bg {
+                fill: #152333;
+              }
+              svg:hover .line {
+                fill: white;
+              }
+            </style>
+
+            <circle class="bg" cx="12" cy="12" r="11" />
+            <path
+              class="line"
+              d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+            />
+          </svg>
+        </button>
+
+        <div class="task-essentials">
+          
         </div>
       </aside>
     </div>

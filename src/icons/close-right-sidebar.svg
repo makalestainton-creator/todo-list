@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24">
+  <style>
+    .bg {
+      fill: transparent;
+      stroke: #152333;
+      stroke-width: 2;
+      transition: fill 0.2s ease;
+    }
+    .line {
+      fill: #152333;
+      transition: fill 0.2s ease;
+    }
+    svg:hover .bg {
+      fill: #152333;
+    }
+    svg:hover .line {
+      fill: white;
+    }
+  </style>
+
+  <circle class="bg" cx="12" cy="12" r="11" />
+  <path class="line"
+    d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+</svg>
